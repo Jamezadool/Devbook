@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            background-color: #f2f2f7;
+            color: #000;
+            line-height: 1.47;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 375px;
+            margin: 0 auto;
+            background-color: #f2f2f7;
+            min-height: 100vh;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            background-color: rgba(248, 248, 248, 0.94);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+            padding: 44px 16px 16px 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 44px;
+        }
+
+        .nav-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .nav-button {
+            font-size: 17px;
+            color: #007aff;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .nav-button:hover {
+            opacity: 0.6;
+        }
+
+        .nav-button.primary {
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .content {
+            padding: 0 0 34px 0;
+        }
+
+        /* Profile Photo Section */
+        .photo-section {
+            background-color: #fff;
+            padding: 32px 0;
+            text-align: center;
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+            margin-bottom: 35px;
+        }
+
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #007aff, #5856d6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            font-weight: 600;
+            color: white;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .change-photo-btn {
+            color: #007aff;
+            background: none;
+            border: none;
+            font-size: 17px;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+
+        .change-photo-btn:hover {
+            opacity: 0.6;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        /* Form Sections */
+        .form-section {
+            background-color: #fff;
+            margin-bottom: 35px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 16px 35px 16px;
+        }
+
+        .section-header {
+            padding: 16px 16px 8px 16px;
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 13px;
+            font-weight: 400;
+            color: #6d6d72;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0;
+        }
+
+        .form-row {
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+            padding: 0 16px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form-row:last-child {
+            border-bottom: none;
+        }
+
+        .form-row.textarea-row {
+            align-items: flex-start;
+            min-height: auto;
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+
+        .form-label {
+            font-size: 17px;
+            color: #000;
+            min-width: 80px;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 17px;
+            color: #000;
+            background: transparent;
+            font-family: inherit;
+            padding: 12px 0;
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: #c7c7cc;
+        }
+
+        .form-textarea {
+            resize: none;
+            min-height: 88px;
+            padding: 12px 0;
+        }
+
+        .form-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0 center;
+            background-repeat: no-repeat;
+            background-size: 16px 12px;
+            padding-right: 20px;
+            color: #007aff;
+        }
+
+        /* Skills Section */
+        .skills-section {
+            background-color: #fff;
+            margin: 0 16px 35px 16px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skills-header {
+            padding: 16px;
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .add-skill-container {
+            padding: 12px 16px;
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .add-skill-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-size: 17px;
+            color: #000;
+            background: transparent;
+            font-family: inherit;
+            padding: 8px 0;
+        }
+
+        .add-skill-input::placeholder {
+            color: #c7c7cc;
+        }
+
+        .add-btn {
+            color: #007aff;
+            background: none;
+            border: none;
+            font-size: 17px;
+            font-weight: 400;
+            cursor: pointer;
+            padding: 8px 0;
+        }
+
+        .add-btn:hover {
+            opacity: 0.6;
+        }
+
+        .skills-list {
+            padding: 0;
+        }
+
+        .skill-item {
+            padding: 12px 16px;
+            border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .skill-item:last-child {
+            border-bottom: none;
+        }
+
+        .skill-name {
+            font-size: 17px;
+            color: #000;
+        }
+
+        .remove-btn {
+            width: 22px;
+            height: 22px;
+            border-radius: 11px;
+            background-color: #ff3b30;
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .remove-btn:hover {
+            opacity: 0.8;
+        }
+
+        /* Section Spacing */
+        .section-footer {
+            padding: 8px 16px 16px 16px;
+        }
+
+        .section-note {
+            font-size: 13px;
+            color: #6d6d72;
+            line-height: 1.38;
+        }
+
+        /* Large Screen Adjustments */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 414px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            body {
+                background-color: #fff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 100vh;
+            }
+
+            .container {
+                background-color: #f2f2f7;
+                border-radius: 12px;
+                box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+        }
+
+        /* Focus States */
+        .form-input:focus,
+        .form-textarea:focus {
+            color: #007aff;
+        }
+
+        /* Smooth Transitions */
+        * {
+            transition: opacity 0.2s ease;
+        }
+
+        /* Hide scrollbar but keep functionality */
+        .container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <nav class="nav-bar">
+            <div class="nav-content">
+                <button class="nav-button" type="button">Cancel</button>
+                <h1 class="nav-title">Edit Profile</h1>
+                <button class="nav-button primary" type="submit" form="profile-form">Done</button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="content">
+            <form id="profile-form" method="POST" action="/profile/update" enctype="multipart/form-data">
+                
+                <!-- Profile Photo Section -->
+                <section class="photo-section">
+                    <div class="avatar-container">
+                        <div class="avatar">AC</div>
+                    </div>
+                    <label for="profile-photo" class="change-photo-btn">
+                        Change Photo
+                    </label>
+                    <input 
+                        type="file" 
+                        id="profile-photo" 
+                        name="profile_photo" 
+                        class="file-input" 
+                        accept="image/*"
+                    >
+                </section>
+
+                <!-- Basic Information -->
+                <section class="form-section">
+                    <div class="form-row">
+                        <label class="form-label" for="name">Name</label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            class="form-input" 
+                            value="Alex Chen" 
+                            required
+                        >
+                    </div>
+                    <div class="form-row textarea-row">
+                        <label class="form-label" for="bio">Bio</label>
+                        <textarea 
+                            id="bio" 
+                            name="bio" 
+                            class="form-textarea" 
+                            placeholder="Tell us about yourself..."
+                        >Passionate full-stack developer and AI enthusiast pursuing Computer Science. I love building innovative solutions that solve real-world problems and exploring the intersection of technology and creativity.</textarea>
+                    </div>
+                </section>
+
+                <!-- Academic Information -->
+                <section class="form-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Education</h2>
+                    </div>
+                    <div class="form-row">
+                        <label class="form-label" for="university">University</label>
+                        <input 
+                            type="text" 
+                            id="university" 
+                            name="university" 
+                            class="form-input" 
+                            value="Stanford University" 
+                            required
+                        >
+                    </div>
+                    <div class="form-row">
+                        <label class="form-label" for="department">Department</label>
+                        <input 
+                            type="text" 
+                            id="department" 
+                            name="department" 
+                            class="form-input" 
+                            value="Computer Science" 
+                            required
+                        >
+                    </div>
+                    <div class="form-row">
+                        <label class="form-label" for="level">Level</label>
+                        <select id="level" name="level" class="form-select" required>
+                            <option value="">Select</option>
+                            <option value="1st Year Bachelor's">1st Year Bachelor's</option>
+                            <option value="2nd Year Bachelor's">2nd Year Bachelor's</option>
+                            <option value="3rd Year Bachelor's" selected>3rd Year Bachelor's</option>
+                            <option value="4th Year Bachelor's">4th Year Bachelor's</option>
+                            <option value="1st Year Master's">1st Year Master's</option>
+                            <option value="2nd Year Master's">2nd Year Master's</option>
+                            <option value="PhD Candidate">PhD Candidate</option>
+                        </select>
+                    </div>
+                </section>
+
+                <!-- Skills Section -->
+                <section class="skills-section">
+                    <div class="skills-header">
+                        <h2 class="section-title">Skills</h2>
+                    </div>
+                    
+                    <div class="add-skill-container">
+                        <input 
+                            type="text" 
+                            class="add-skill-input" 
+                            placeholder="Add a skill"
+                            id="new-skill"
+                        >
+                        <button type="button" class="add-btn">Add</button>
+                    </div>
+
+                    <div class="skills-list">
+                        <div class="skill-item">
+                            <span class="skill-name">JavaScript</span>
+                            <button type="button" class="remove-btn">−</button>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Python</span>
+                            <button type="button" class="remove-btn">−</button>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">React</span>
+                            <button type="button" class="remove-btn">−</button>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Node.js</span>
+                            <button type="button" class="remove-btn">−</button>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">MongoDB</span>
+                            <button type="button" class="remove-btn">−</button>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">TensorFlow</span>
+                            <button type="button" class="remove-btn">−</button>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">Docker</span>
+                            <button type="button" class="remove-btn">−</button>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-name">AWS</span>
+                            <button type="button" class="remove-btn">−</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Hidden input for skills -->
+                <input type="hidden" name="skills" value="JavaScript,Python,React,Node.js,MongoDB,TensorFlow,Docker,AWS">
+                
+            </form>
+        </main>
+    </div>
+</body>
+</html>

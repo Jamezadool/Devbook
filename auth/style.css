@@ -1,0 +1,358 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+    background-color: #0d1117;
+    color: #f0f6fc;
+    line-height: 1.5;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+.auth-form {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 32px;
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 8px 24px rgba(1, 4, 9, 0.15);
+}
+
+.form-title {
+    font-size: 24px;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #f0f6fc;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #f0f6fc;
+    margin-bottom: 8px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    color: #f0f6fc;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #1f6feb;
+    background-color: #0d1117;
+    border: 1px solid #30363d;
+    box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.3);
+}
+
+.form-input::placeholder {
+    color: #7d8590;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #238636;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #2ea043;
+}
+
+.btn-primary:active {
+    background-color: #1a7f37;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: #1f6feb;
+    border: 1px solid #30363d;
+}
+
+.btn-secondary:hover {
+    background-color: #f6f8fa;
+    color: #24292f;
+}
+
+.divider {
+    margin: 20px 0;
+    text-align: center;
+    position: relative;
+}
+
+.divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #30363d;
+}
+
+.divider span {
+    background-color: #161b22;
+    padding: 0 16px;
+    color: #7d8590;
+    font-size: 12px;
+}
+
+.form-footer {
+    margin-top: 24px;
+    text-align: center;
+}
+
+.form-footer a {
+    color: #1f6feb;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.form-footer a:hover {
+    text-decoration: underline;
+}
+
+.forgot-password {
+    margin-top: 16px;
+    text-align: right;
+}
+
+.forgot-password a {
+    color: #1f6feb;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+.signup-prompt {
+    margin-top: 24px;
+    padding: 16px;
+    text-align: center;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    background-color: #0d1117;
+}
+
+.signup-prompt p {
+    color: #f0f6fc;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.tab-nav {
+    display: flex;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #30363d;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 12px;
+    background: none;
+    border: none;
+    color: #7d8590;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+.tab-button.active {
+    color: #f0f6fc;
+    border-bottom-color: #fd7e14;
+}
+
+.tab-button:hover {
+    color: #f0f6fc;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.password-strength {
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.strength-bar {
+    height: 3px;
+    background-color: #30363d;
+    border-radius: 2px;
+    margin: 4px 0;
+    overflow: hidden;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.strength-weak .strength-fill {
+    width: 33%;
+    background-color: #da3633;
+}
+
+.strength-medium .strength-fill {
+    width: 66%;
+    background-color: #fb8500;
+}
+
+.strength-strong .strength-fill {
+    width: 100%;
+    background-color: #238636;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    margin: 16px 0;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-right: 8px;
+    margin-top: 2px;
+}
+
+.checkbox-group label {
+    font-size: 12px;
+    color: #7d8590;
+    line-height: 1.4;
+}
+
+.checkbox-group label a {
+    color: #1f6feb;
+    text-decoration: none;
+}
+
+.checkbox-group label a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 544px) {
+    .auth-form {
+        padding: 24px 16px;
+        margin: 0 16px;
+    }
+    
+    .container {
+        padding: 16px 0;
+    }
+}
+
+.confirmationcode
+{
+    width:100vw;
+    height:100vh;
+    background: rgba(13, 17, 23, 0.5);
+    position:fixed;
+    backdrop-filter: blur(10px) saturate(100%);
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    min-height:100vh;
+    display:none;
+}
+.code{
+    display:flex;
+    align-items: flex-start;
+    flex-direction:column;
+    gap:30px;
+    max-width:340px;
+    padding:10px;
+    background:#fff;
+    border-radius:10px;
+}
+.code input[ type = text]
+{
+    background:none;
+    border:2px solid #161b22;
+    height:60px;
+    border-radius:10px;
+    max-width:100%;
+    padding:20px;
+    font-size:30px;
+    color:#161b22;
+    outline:none;
+    position:relative;
+}
+.code input[ type = submit]
+{
+    width: 100%;
+    background:#0d1117;
+    color: #e3e3e3;
+    height:50px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:17px;
+    font-weight:700;
+    transition: .5s ease-in-out;
+}
+.code input[ type = submit]:hover{
+    background:#161b22;
+}
+.verification-code-action
+{
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.verification-code-action a{
+    color:#0d1117;
+    text-decoration:none;
+    transition: .5s ease-in-out;
+    font-weight:bold;
+    font-size:14px;
+}
+.verification-code-action a:hover{
+    color:#1f6feb;
+}

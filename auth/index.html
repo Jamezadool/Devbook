@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluhorizon Auth Clone</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="confirmationcode">
+        <div class="code">
+            <input type="text" name="confirmation" id="code-confirmation" maxlength="6" required>
+            <input type="submit" value="Confirm Verification Code">
+
+            <div class="verification-code-action">
+                <a href="#">Resend code</a>
+                <a href="#">Wrong Email? Change it.</a>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        
+        <img src="../logo/logo.png" alt="company logo" style="transform: scale(0.4); margin-top:-6vh;">
+        <div class="auth-form">
+            <div class="tab-nav">
+                <button class="tab-button active" onclick="showTab('login')">Sign in</button>
+                <button class="tab-button" onclick="showTab('signup')">Sign up</button>
+            </div>
+
+            <!-- Login Tab -->
+            <div id="login-tab" class="tab-content active">
+                <h1 class="form-title">Sign in to Bluhorizon</h1>
+                
+                <form id="login-form">
+                    <div class="form-group">
+                        <label class="form-label" for="login-username">Email address</label>
+                        <input class="form-input" type="email" id="login-username" name="username" autocomplete="username">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="login-password">Password</label>
+                        <input class="form-input" type="password" id="login-password" name="password" autocomplete="current-password">
+                        <div class="forgot-password">
+                            <a href="#" onclick="showForgotPassword()">Forgot password?</a>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" id="login-btn">Sign in</button>
+
+                    
+                </form>
+                <div id="login-error" style="text-align:center; color:red; margin-top:10px;"></div>
+                <div class="signup-prompt">
+                    <p>New to Bluhorizon?</p>
+                    <a href="#" class="btn btn-secondary" onclick="showTab('signup')">Create an account</a>
+                </div>
+            </div>
+
+            
+            <!-- Signup Tab -->
+            <div id="signup-tab" class="tab-content">
+                <h1 class="form-title">Create your account</h1>
+                
+                <form id="signup-form">
+                    <div class="form-group">
+                        <label class="form-label" for="signup-username">Username</label>
+                        <input class="form-input" type="text" id="signup-username" name="username" autocomplete="username" oninput="checkUsername(this.value)">
+                    </div>
+                    <div id="username-checked" style="color:lawngreen; text-align:center;font-size:15px; margin-top:-10px;"></div>
+                    <div class="form-group">
+                        <label class="form-label" for="signup-email">Email address</label>
+                        <input class="form-input" type="email" id="signup-email" name="email" autocomplete="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="signup-password">Password</label>
+                        <input class="form-input" type="password" id="signup-password" name="password" autocomplete="new-password" oninput="checkPasswordStrength(this.value)">
+                        <div class="password-strength" id="password-strength" style="display: none;">
+                            <div class="strength-bar">
+                                <div class="strength-fill"></div>
+                            </div>
+                            <span class="strength-text"></span>
+                        </div>
+                    </div>
+                    <div id="error" style="color:red; text-align:center;"></div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="email-updates" name="email-updates">
+                        <label for="email-updates">
+                            Email me occasionally with product updates and announcements. You can unsubscribe at any time in your <a href="#">account settings</a> or in the emails we send you.
+                        </label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="terms-agreement" name="terms-agreement" required>
+                        <label for="terms-agreement">
+                            By creating an account, you agree to the <a href="#">Terms of Service</a>. For more information about Bluhorizon's privacy practices, see the <a href="#">Bluhorizon Privacy Statement</a>. We'll occasionally send you account-related emails.
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="signup-btn">Create account</button>
+                </form>
+
+                <div class="form-footer">
+                    <p style="color: #7d8590; font-size: 12px; margin-top: 16px;">
+                        Already have an account? <a href="#" onclick="showTab('login')">Sign in</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="auth.js"></script>
+</body>
+</html>

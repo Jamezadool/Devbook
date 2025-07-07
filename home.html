@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homechat</title>
+    <style>
+        *{
+            padding:none;
+            margin:none;
+            box-sizing:border-box;
+        }
+        body{
+            background: #0d1117;
+            color:lightgray;
+            display:flex;
+            align-items:center;
+            justify-content: center;
+            min-height:110vh;
+        }
+
+        .container{
+            background: #15171d;
+            padding:10px;
+            width:350px;
+            display:flex;
+            align-items:flex-start;
+            flex-direction:column;
+            gap:10px;
+        }
+        .chats{
+            border:1px solid #0d1117;
+            padding:10px;
+            /* height:50px; */
+            width:100%;
+            background: #0d1117;
+            cursor: pointer;
+            position:relative;
+        }
+        .chats:hover{
+            background:none;
+        }
+        .chats::before{
+            content:'';
+            position:absolute;
+            width:0%;
+            height:100%;
+            background:rgba(225,225,225,0.3);
+            top:0;
+            left:0;
+            transition: all .3s ease-in-out;
+            z-index:1;
+        }
+        .chats:hover::before{
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DevNote</h1>
+        <div class="chats" data-username="Bob">
+            <div class="image"></div>
+            <div class="username">Bob</div>
+        </div>
+        <div class="chats"  data-username="Alice">
+            <div class="image"></div>
+            <div class="username">Alice</div>
+        </div>
+        <div class="chats" data-username="John">
+            <div class="image"></div>
+            <div class="username">John</div>
+        </div>
+    </div>
+
+    <script>
+        const users = document.querySelectorAll(".chats");      
+        users.forEach(user =>
+           user.addEventListener("click", () => {
+                const targetUser = user.dataset.username;
+                // console.log(targetUser);
+                localStorage.setItem("targetuser", targetUser);
+                window.location.href="http://127.0.0.1:3000/";
+           })
+        );
+    </script>
+</body>
+</html>

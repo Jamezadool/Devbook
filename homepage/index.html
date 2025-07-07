@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>devnote</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="header-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-left">
+                <div class="logo">Devnote</div>
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search devnote">
+                    <span class="search-icon">🔍</span>
+                </div>
+                <div class="header-left-right">
+                    <div class="nav-icon" onclick="showPage('projects')" title="project">📋</div>
+                    <div class="nav-icon menu-icon" title="menu">=</div>
+                </div>
+            </div>
+            <div class="header-middle">
+                <div class="nav-action nav-icon active" onclick="showPage('home')" title="Home">🏠</div>
+                <div class="nav-icon" onclick="showPage('projects')" title="Projects">📋</div>
+                <div class="nav-icon" onclick="showPage('pbl')" title="Project based learning">📋</div>
+                <div class="nav-icon" onclick="showPage('marketplace')" title="Marketplace">🛍️</div>
+            </div>
+            <div class="nav-icons">
+                <div class="nav-icon" onclick="showPage('messages')" title="Messages">💬</div>
+                <div class="nav-icon" onclick="showPage('notifications')" title="Notifications">🔔</div>
+                <div class="nav-icon" onclick="showPage('profile')" title="Profile">👤</div>
+            </div>
+        </div>
+        <div class="mobile-nav">
+            <div class="mobile-middle">
+                <div class="nav-action nav-icon active" onclick="showPage('home')" title="Home">🏠</div>
+                <div class="nav-icon" onclick="showPage('pbl')" title="project based learning">📋</div>
+                <div class="nav-icon" onclick="showPage('messages')" title="Messages">💬</div>
+                <div class="nav-icon" onclick="showPage('notifications')" title="Notifications">🔔</div>
+                <div class="nav-icon" onclick="showPage('marketplace')" title="Marketplace">🛍️</div>
+                <div class="nav-icon" onclick="showPage('profile')" title="Profile">👤</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-item active" onclick="showPage('home')">
+                    <div class="sidebar-icon" style="background: #e3f2fd; color: #1976d2;">🏠</div>
+                    <div class="sidebar-text">News Feed</div>
+                </div>
+                <div class="sidebar-item" onclick="showPage('messages')">
+                    <div class="sidebar-icon" style="background: #f3e5f5; color: #7b1fa2;">💬</div>
+                    <div class="sidebar-text">Messages</div>
+                </div>
+                <div class="sidebar-item" onclick="showPage('marketplace')">
+                    <div class="sidebar-icon" style="background: #e8f5e8; color: #388e3c;">🛍️</div>
+                    <div class="sidebar-text">Marketplace</div>
+                </div>
+                <div class="sidebar-item" onclick="showPage('projects')">
+                    <div class="sidebar-icon" style="background: #e8f5e8; color: #388e3c;">📋</div>
+                    <div class="sidebar-text">Projects</div>
+                </div>
+                <div class="sidebar-item" onclick="showPage('pbl')">
+                    <div class="sidebar-icon" style="background: #e8f5e8; color: #388e3c;">📋</div>
+                    <div class="sidebar-text">Project Based Learning</div>
+                </div>
+                <div class="sidebar-item" onclick="showPage('courses')">
+                    <div class="sidebar-icon" style="background: #e8f5e8; color: #388e3c;">📋</div>
+                    <div class="sidebar-text">Courses</div>
+                </div>
+                <div class="sidebar-item settings">
+                    <div class="sidebar-icon" style="background: #e8f5e8; color: #388e3c;">⚙️</div>
+                    <div class="sidebar-text">Settings & Privacy</div>
+                </div>
+                <div class="settings-dropdown">
+                    <div class="settings-item">
+                        <div class="settings-icon" style="background: #e8f5e8; color: #388e3c;">⚙️</div>
+                        <div class="settings-text">Settings</div>
+                    </div>
+                    <div class="theme-controller">
+                        <div class="theme-icon" style="background: #e8f5e8; color: #388e3c;">☀️</div>
+                        <div class="sidebar-text theme-text">Dark Mode</div>
+
+                        <div class="toggle">
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="sidebar-item" onclick="showPage('groups')">
+                    <div class="sidebar-icon" style="background: #fff3e0; color: #f57c00;">👥</div>
+                    <div class="sidebar-text">Groups</div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-icon" style="background: #fce4ec; color: #c2185b;">⚡</div>
+                    <div class="sidebar-text">Events</div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-icon" style="background: #e1f5fe; color: #0097a7;">📺</div>
+                    <div class="sidebar-text">Watch</div>
+                </div>
+                <div class="sidebar-item">
+                    <div class="sidebar-icon" style="background: #f9fbe7; color: #689f38;">📱</div>
+                    <div class="sidebar-text">Gaming</div>
+                </div> -->
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Home Page -->
+            <div id="home" class="page active">
+                <!-- Create Post -->
+                <div class="create-post">
+                    <div class="create-post-header">
+                        <img src="/image/profile.png" alt="user profile image" width="100%"
+                            onclick="showPage('profile')">
+                        <textarea class="post-input" placeholder="What's on your mind?" autocorrect="on"></textarea>
+                    </div>
+                    <div class="inputed-files">
+                        <div class="inputed-file">
+
+                        </div>
+                    </div>
+                    <div class="post-actions">
+                        <div class="post-options">
+                            <input type="file" name="post-input-photo" id="post-input-photo" accept="image/*"
+                                style="display:none;" onchange="handleFileSelect(event)">
+                            <input type="file" name="post-input-photo" id="post-input-file" accept="*/*"
+                                style="display:none;" onchange="handleFileSelect(event)">
+                            <input type="file" name="post-input-photo" id="post-input-code" accept="*/*"
+                                style="display:none;">
+                            <div class="post-option" data-file="post-input-photo">📷 <span>Photo </span></div>
+                            <div class="post-option" data-file="post-input-file">🎥 <span>Files</span></div>
+                            <div class="post-option" data-file="post-input-code">👨‍💻 <span>Codes</span>
+                            </div>
+                        </div>
+                        <button class="post-btn">Post</button>
+                    </div>
+                </div>
+
+                <!-- Posts -->
+                <div class="post">
+                    <div class="post-header">
+                        <div class="avatar">JS</div>
+                        <div class="post-info">
+                            <h3>John Smith</h3>
+                            <div class="post-time">2 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="post-content-container">
+                        <div class="post-content more">
+                            Just finished an amazing workout session! 💪 Feeling energized and ready to tackle the week
+                            ahead. Remember, consistency is key to achieving your fitness goals!
+                            <span class="see-more">...See More</span>
+                        </div>
+                    </div>
+                    <div class="post-image">🏋️‍♂️</div>
+                    <div class="post-actions-bar">
+                        <div class="post-action" data-liked="false">
+                            <div class="emoji">👍</div> <span>Upvote</span>
+                        </div>
+                        <div class="post-action">
+                            <div class="emoji">💬</div> <span>Comment</span>
+                        </div>
+                        <div class="post-action">
+                            <div class="emoji">📤</div> <span>Share</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post">
+                    <div class="post-header">
+                        <div class="avatar" style="background: linear-gradient(135deg, #ff6b6b, #ff8e8e);">EM</div>
+                        <div class="post-info">
+                            <h3>Emma Martinez</h3>
+                            <div class="post-time">4 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="post-content-container">
+                        <div class="post-content">
+                            Beautiful sunset from my evening walk today 🌅 Nature has a way of putting everything into
+                            perspective. Taking time to appreciate the little moments.
+                            <span class="see-more">...See More</span>
+                        </div>
+                    </div>
+                    <div class="post-image">🌅</div>
+                    <div class="post-actions-bar">
+                        <div class="post-action" data-liked="false">
+                            <div class="emoji">👍</div> <span>Upvote</span>
+                        </div>
+                        <div class="post-action">
+                            <div class="emoji">💬</div> <span>Comment</span>
+                        </div>
+                        <div class="post-action">
+                            <div class="emoji">📤</div> <span>Share</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post">
+                    <div class="post-header">
+                        <div class="avatar" style="background: linear-gradient(135deg, #4ecdc4, #44a08d);">AL</div>
+                        <div class="post-info">
+                            <h3>Alex Lee</h3>
+                            <div class="post-time">6 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="post-content-container">
+                        <div class="post-content">
+                            Excited to share that I just launched my new project! 🚀 It's been months of hard work, but
+                            seeing it come to life makes it all worth it. Thanks to everyone who supported me along the
+                            way!
+                            <span class="see-more">...See More</span>
+                        </div>
+                    </div>
+                    <div class="post-actions-bar">
+                        <div class="post-action" data-liked="false">
+                            <div class="emoji">👍</div> <span>Upvote</span>
+                        </div>
+                        <div class="post-action">
+                            <div class="emoji">💬</div> <span>Comment</span>
+                        </div>
+                        <div class="post-action">
+                            <div class="emoji">📤</div> <span>Share</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Page -->
+            <div id="profile" class="page">
+                <div class="profile-header">
+                    <div class="profile-avatar">YN</div>
+                    <div class="profile-name">Your Name</div>
+                    <div class="profile-bio">Software Developer | Tech Enthusiast | Coffee Lover ☕</div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <div class="stat-number">1,234</div>
+                            <div class="stat-label">Friends</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">567</div>
+                            <div class="stat-label">Following</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">89</div>
+                            <div class="stat-label">Posts</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="post">
+                    <div class="post-header">
+                        <div class="avatar">YN</div>
+                        <div class="post-info">
+                            <h3>Your Name</h3>
+                            <div class="post-time">1 day ago</div>
+                        </div>
+                    </div>
+                    <div class="post-content-container">
+                        <div class="post-content">
+                            Working on some exciting new features for my latest project! Can't wait to share more
+                            details
+                            soon. 🚀✨
+                            <span class="see-more">...See More</span>
+                        </div>
+                    </div>
+                    <div class="post-actions-bar">
+                        <div class="post-action" data-liked="false">
+                            <div class="emoji">👍</div> <span>Upvote</span>
+                        </div>
+                        <div class="post-action">
+                            <div class="emoji">💬</div> <span>Comment</span>
+                        </div>
+                        <div class="post-action">
+                            <div class="emoji">📤</div> <span>Share</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messages Page -->
+            <div id="messages" class="page">
+                <h1 class="page-title">Messages</h1>
+                <div class="messages-list">
+                    <div class="message-item" onclick="window.location.href='message.html'">
+                        <div class="message-avatar">SM</div>
+                        <div class="message-content">
+                            <div class="message-name">Sarah Miller</div>
+                            <div class="message-preview">Hey! How's your project going?</div>
+                        </div>
+                        <div class="message-time">2m</div>
+                    </div>
+                    <div class="message-item">
+                        <div class="message-avatar" style="background: linear-gradient(135deg, #4ecdc4, #44a08d);">MJ
+                        </div>
+                        <div class="message-content">
+                            <div class="message-name">Mike Johnson</div>
+                            <div class="message-preview">Thanks for the help yesterday!</div>
+                        </div>
+                        <div class="message-time">1h</div>
+                    </div>
+                    <div class="message-item">
+                        <div class="message-avatar" style="background: linear-gradient(135deg, #ffd93d, #ff6b35);">LW
+                        </div>
+                        <div class="message-content">
+                            <div class="message-name">Lisa Wang</div>
+                            <div class="message-preview">Are we still on for lunch tomorrow?</div>
+                        </div>
+                        <div class="message-time">3h</div>
+                    </div>
+                    <div class="message-item">
+                        <div class="message-avatar" style="background: linear-gradient(135deg, #a8edea, #fed6e3);">JD
+                        </div>
+                        <div class="message-content">
+                            <div class="message-name">James Davis</div>
+                            <div class="message-preview">Check out this article I found</div>
+                        </div>
+                        <div class="message-time">5h</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notifications Page -->
+            <div id="notifications" class="page">
+                <h1 class="page-title">Notifications</h1>
+                <div class="notification">
+                    <div class="notification-item">
+                        <strong>Emma Martinez</strong> liked your post about the sunset photo
+                        <div class="post-time">5 minutes ago</div>
+                    </div>
+                    <div class="notification-item">
+                        <strong>Alex Lee</strong> commented on your project launch post
+                        <div class="post-time">1 hour ago</div>
+                    </div>
+                    <div class="notification-item">
+                        <strong>John Smith</strong> shared your workout motivation post
+                        <div class="post-time">2 hours ago</div>
+                    </div>
+                    <div class="notification-item">
+                        You have <strong>3 new friend requests</strong>
+                        <div class="post-time">4 hours ago</div>
+                    </div>
+                    <div class="notification-item">
+                        You have <strong>3 new friend requests</strong>
+                        <div class="post-time">4 hours ago</div>
+                    </div>
+                    <div class="notification-item">
+                        You have <strong>3 new friend requests</strong>
+                        <div class="post-time">4 hours ago</div>
+                    </div>
+                    <div class="notification-item">
+                        You have <strong>3 new friend requests</strong>
+                        <div class="post-time">4 hours ago</div>
+                    </div>
+                    <div class="notification-item">
+                        You have <strong>3 new friend requests</strong>
+                        <div class="post-time">4 hours ago</div>
+                    </div>
+                    <div class="notification-item">
+                        You have <strong>3 new friend requests</strong>
+                        <div class="post-time">4 hours ago</div>
+                    </div>
+                    <div class="notification-item">
+                        You have <strong>3 new friend requests</strong>
+                        <div class="post-time">4 hours ago</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marketplace Page -->
+            <div id="marketplace" class="page">
+                <h1 class="page-title">Marketplace</h1>
+                <div class="marketplace-item">
+                    <h3>MacBook Pro 2021 - Like New</h3>
+                    <p><strong>$1,200</strong> • Posted 2 days ago</p>
+                    <p>Barely used MacBook Pro in excellent condition. Includes original charger and box.</p>
+                </div>
+                <div class="marketplace-item">
+                    <h3>Vintage Coffee Table</h3>
+                    <p><strong>$150</strong> • Posted 1 week ago</p>
+                    <p>Beautiful vintage coffee table, perfect for any living room. Solid wood construction.</p>
+                </div>
+                <div class="marketplace-item">
+                    <h3>iPhone 13 Pro - Unlocked</h3>
+                    <p><strong>$650</strong> • Posted 3 days ago</p>
+                    <p>Unlocked iPhone 13 Pro, 128GB. Minor scratches on back, screen is perfect.</p>
+                </div>
+            </div>
+
+            <!-- Groups Page -->
+            <!-- <div id="groups" class="page">
+                <h1 class="page-title">Groups</h1>
+                <div class="group-item">
+                    <h3>🚀 Tech Startups & Entrepreneurs</h3>
+                    <p>A community for startup founders and tech entrepreneurs to share insights and network.</p>
+                    <p><strong>12,543 members</strong> • 5 new posts today</p>
+                </div>
+                <div class="group-item">
+                    <h3>📷 Photography Enthusiasts</h3>
+                    <p>Share your best shots, get feedback, and learn new techniques from fellow photographers.</p>
+                    <p><strong>8,291 members</strong> • 12 new posts today</p>
+                </div>
+                <div class="group-item">
+                    <h3>🍳 Home Cooking & Recipes</h3>
+                    <p>Discover amazing recipes, share your culinary creations, and get cooking tips.</p>
+                    <p><strong>15,672 members</strong> • 8 new posts today</p>
+                </div>
+                <div class="group-item">
+                    <h3>💪 Fitness & Wellness</h3>
+                    <p>Motivation, workout routines, and wellness tips for a healthier lifestyle.</p>
+                    <p><strong>9,834 members</strong> • 15 new posts today</p>
+                </div>
+            </div> -->
+            <div id="courses" class="page">
+                <h1 class="page-title">Courses</h1>
+                <div class="coming-soon">
+                    <h2>Coming Soon</h2>
+                </div>
+            </div>
+            <div id="pbl" class="page">
+                <h1 class="page-title">Projects Based Learning</h1>
+                <div class="coming-soon">
+                    <h2>Coming Soon</h2>
+                </div>
+            </div>
+            <div id="projects" class="page">
+                <h1 class="page-title">Projects</h1>
+                <div class="coming-soon">
+                    <h2>Coming Soon</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications Page -->
+        <div id="notification">
+            <!-- <h1 class="page-title">Notifications</h1>
+            <div class="notifications">
+                <div class="notification-item">
+                    <strong>Emma Martinez</strong> liked your post about the sunset photo
+                    <div class="post-time">5 minutes ago</div>
+                </div>
+                <div class="notification-item">
+                    <strong>Alex Lee</strong> commented on your project launch post
+                    <div class="post-time">1 hour ago</div>
+                </div>
+                <div class="notification-item">
+                    <strong>John Smith</strong> shared your workout motivation post
+                    <div class="post-time">2 hours ago</div>
+                </div>
+                <div class="notification-item">
+                    You have <strong>3 new friend requests</strong>
+                    <div class="post-time">4 hours ago</div>
+                </div>
+                <div class="notification-item">
+                    You have <strong>3 new friend requests</strong>
+                    <div class="post-time">4 hours ago</div>
+                </div>
+                <div class="notification-item">
+                    You have <strong>3 new friend requests</strong>
+                    <div class="post-time">4 hours ago</div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <script src="apps.js"></script>
+    <script src="posts.js"></script>
+</body>
+
+</html>
