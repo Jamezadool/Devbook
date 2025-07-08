@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>iOS Chat Interface</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="chatlist">
+            <div class="header">
+                <div class="appname">DevNote</div>
+                <div class="actionmenu">
+                    <div class="menus">
+                        <button>🔍</button>
+                    </div>
+                    <div class="menus">
+                        <button>🔍</button>
+                    </div>
+                    <div class="menus">
+                        <button>🔍</button>
+                    </div>
+                </div>
+            </div>
+            <div class="chats">
+                <!--Javascript would inject the tags needed for the chat list here.-->
+            </div>
+        </div>
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="header-left">
+                    <button class="back-btn" style="color: white; font-size:30px;">‹</button>
+                    <div class="contact-info">
+                        <div class="avatar">JD</div>
+                        <div class="contact-name"></div>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="header-btn">📹</button>
+                    <button class="header-btn">📞</button>
+                </div>
+            </div>
+
+            <div class="messages-container" id="messagesContainer">
+                <!-- <div class="message received">
+                    <div class="avatar">JD</div>
+                    <div class="message-bubble">
+                        Hey! How are you doing today?
+                    </div>
+                </div>
+                <div class="message-time">2:30 PM</div>
+
+                <div class="message sent">
+                    <div class="message-bubble">
+                        I'm great! Just working on some projects. How about you?
+                    </div>
+                </div>
+                <div class="message-time">2:32 PM</div>
+
+                <div class="message received">
+                    <div class="avatar">JD</div>
+                    <div class="message-bubble">
+                        Same here! Want to grab coffee later?
+                    </div>
+                </div>
+                <div class="message-time">2:35 PM</div> -->
+
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="typing-bubble">
+                        <div class="typing-dots">
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                            <div class="typing-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="attachment-menu" id="attachmentMenu">
+                <div class="attachment-option" onclick="openCamera()">
+                    <div class="attachment-icon camera-icon">📷</div>
+                    <div class="attachment-text">Camera</div>
+                </div>
+                <div class="attachment-option" onclick="openPhotoLibrary()">
+                    <div class="attachment-icon photo-icon">🖼️</div>
+                    <div class="attachment-text">Photo Library</div>
+                </div>
+                <div class="attachment-option" onclick="openDocuments()">
+                    <div class="attachment-icon document-icon">📄</div>
+                    <div class="attachment-text">Document</div>
+                </div>
+                <div class="attachment-option" onclick="shareLocation()">
+                    <div class="attachment-icon location-icon">📍</div>
+                    <div class="attachment-text">Location</div>
+                </div>
+            </div>
+
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <button class="attachment-btn" onclick="toggleAttachmentMenu()">+</button>
+                    <textarea class="message-input" id="messageInput" placeholder="Message" rows="1"></textarea>
+                </div>
+                <button class="send-btn" id="sendBtn" onclick="sendMessage()">↑</button>
+            </div>
+
+            
+            <input type="file" class="file-input" id="photoInput" accept="image/*" onchange="handleFileSelect(event)">
+            <input type="file" class="file-input" id="documentInput" accept="*/*" onchange="handleFileSelect(event)">
+            <input type="file" class="file-input" id="cameraInput" accept="image/*" capture="environment" onchange="handleFileSelect(event)">
+        </div>
+    </div>
+
+    
+     <script src="data.js"></script>
+     <script src="testing.js"></script>
+     <script src="socket.io.min.js"></script>
+     <script src="app.js"></script>
+     
+</body>
+</html>
