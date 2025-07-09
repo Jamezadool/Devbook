@@ -7,9 +7,11 @@
     <title>devnote</title>
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/single.css">
+    <link rel="stylesheet" href="/assets/css/chat-message.css">
 </head>
 
 <body>
+    <input type="text" class="hidden" value="">
     <div class="header-container">
         <!-- Header -->
         <div class="header">
@@ -31,7 +33,7 @@
                 <div class="nav-icon" onclick="showPage('marketplace')" title="Marketplace">🛍️</div>
             </div>
             <div class="nav-icons">
-                <div class="nav-icon" onclick="showPage('messages')" title="Messages">💬</div>
+                <div class="nav-icon message-chat" title="Messages">💬</div>
                 <div class="nav-icon" onclick="showPage('notifications')" title="Notifications">🔔</div>
                 <div class="nav-icon" onclick="showPage('profile')" title="Profile">👤</div>
             </div>
@@ -40,7 +42,8 @@
             <div class="mobile-middle">
                 <div class="nav-action nav-icon active" onclick="showPage('home')" title="Home">🏠</div>
                 <div class="nav-icon" onclick="showPage('pbl')" title="project based learning">📋</div>
-                <div class="nav-icon" onclick="showPage('messages')" title="Messages">💬</div>
+                <!-- <div class="nav-icon" onclick="showPage('messages')" title="Messages">💬</div> -->
+                 <div class="nav-icon message-chat mobile-message" title="Messages">💬</div>
                 <div class="nav-icon" onclick="showPage('notifications')" title="Notifications">🔔</div>
                 <div class="nav-icon" onclick="showPage('marketplace')" title="Marketplace">🛍️</div>
                 <div class="nav-icon" onclick="showPage('profile')" title="Profile">👤</div>
@@ -56,7 +59,7 @@
                     <div class="sidebar-icon" style="background: #e3f2fd; color: #1976d2;">🏠</div>
                     <div class="sidebar-text">News Feed</div>
                 </div>
-                <div class="sidebar-item" onclick="showPage('messages')">
+                <div class="sidebar-item message-chat">
                     <div class="sidebar-icon" style="background: #f3e5f5; color: #7b1fa2;">💬</div>
                     <div class="sidebar-text">Messages</div>
                 </div>
@@ -132,9 +135,9 @@
                     <div class="post-actions">
                         <div class="post-options">
                             <input type="file" name="post-input-photo" id="post-input-photo" accept="image/*"
-                                style="display:none;" onchange="handleFileSelect(event)">
+                                style="display:none;" onchange="handlePostFileSelect(event)">
                             <input type="file" name="post-input-photo" id="post-input-file" accept="*/*"
-                                style="display:none;" onchange="handleFileSelect(event)">
+                                style="display:none;" onchange="handlePostFileSelect(event)">
                             <input type="file" name="post-input-photo" id="post-input-code" accept="*/*"
                                 style="display:none;">
                             <div class="post-option" data-file="post-input-photo">📷 <span>Photo </span></div>
@@ -449,7 +452,7 @@
             <div id="messages" class="page">
                 <h1 class="page-title">Messages</h1>
                 <div class="messages-list">
-                    <div class="message-item" onclick="window.location.href='message.html'">
+                    <div class="message-item" onclick="window.location.href='/chat/index.html'">
                         <div class="message-avatar">SM</div>
                         <div class="message-content">
                             <div class="message-name">Sarah Miller</div>
@@ -553,7 +556,6 @@
                     <p>A website that shows the weather</p>
                 </div>
             </div>
-
             <!-- Groups Page -->
             <!-- <div id="groups" class="page">
                 <h1 class="page-title">Groups</h1>
@@ -598,41 +600,189 @@
             </div>
         </div>
 
-        <!-- Notifications Page -->
-        <div id="notification">
-            <!-- <h1 class="page-title">Notifications</h1>
-            <div class="notifications">
-                <div class="notification-item">
-                    <strong>Emma Martinez</strong> liked your post about the sunset photo
-                    <div class="post-time">5 minutes ago</div>
+        <div class="chat-message">
+            <div class="chats-container">
+                <div class="chat-lists">
+                    <div class="chat-lists-header">
+                        <h3>Chats</h3>
+                        <div class="chat-lists-action">
+                            <button>.</button>
+                            <button>.</button>
+                            <button>.</button>
+                        </div>
+                    </div>
+                    <div class="chat-search-bar">
+                        <button>🔍</button>
+                        <input type="text" name="search" id="search" placeholder="Search DevChat">
+                    </div>
+                    <div class="chat-list-wrapper">
+                        <div class="chat-list-container">
+                            <!-- <div class="chats-list">
+                                <div class="chats-list-avatar">SA</div>
+                                <div class="chat-content-preview">
+                                    <div class="username" data-username="sandra">Sandra</div>
+                                    <div class="last-message">Alright, I'll Check your Projects</div>
+                                </div>
+                            </div>
+                            <div class="chats-list">
+                                <div class="chats-list-avatar">JA</div>
+                                <div class="chat-content-preview">
+                                    <div class="username" data-username="James">James</div>
+                                    <div class="last-message">Interesting Idea</div>
+                                </div>
+                            </div>
+                            <div class="chats-list">
+                                <div class="chats-list-avatar">SA</div>
+                                <div class="chat-content-preview">
+                                    <div class="username" data-username="sandra">Adebayo</div>
+                                    <div class="last-message">kk</div>
+                                </div>
+                            </div>
+                            <div class="chats-list">
+                                <div class="chats-list-avatar">SA</div>
+                                <div class="chat-content-preview">
+                                    <div class="username" data-username="sandra">Adebayo</div>
+                                    <div class="last-message">kk</div>
+                                </div>
+                            </div>
+                            <div class="chats-list">
+                                <div class="chats-list-avatar">SA</div>
+                                <div class="chat-content-preview">
+                                    <div class="username" data-username="sandra">Adebayo</div>
+                                    <div class="last-message">kk</div>
+                                </div>
+                            </div>
+                            <div class="chats-list">
+                                <div class="chats-list-avatar">SA</div>
+                                <div class="chat-content-preview">
+                                    <div class="username" data-username="sandra">Adebayo</div>
+                                    <div class="last-message">kk</div>
+                                </div>
+                            </div>
+                            <div class="chats-list">
+                                <div class="chats-list-avatar">SA</div>
+                                <div class="chat-content-preview">
+                                    <div class="username" data-username="sandra">Adebayo</div>
+                                    <div class="last-message">kk</div>
+                                </div>
+                            </div>
+                            <div class="chats-list">
+                                <div class="chats-list-avatar">SA</div>
+                                <div class="chat-content-preview">
+                                    <div class="username" data-username="sandra">Adebayo</div>
+                                    <div class="last-message">kk</div>
+                                </div>
+                            </div>
+                            <div class="chats-list">
+                                <div class="chats-list-avatar">SA</div>
+                                <div class="chat-content-preview">
+                                    <div class="username" data-username="sandra">Adebayo</div>
+                                    <div class="last-message">kk</div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+
                 </div>
-                <div class="notification-item">
-                    <strong>Alex Lee</strong> commented on your project launch post
-                    <div class="post-time">1 hour ago</div>
+
+                <div class="chats">
+                    <div class="chat-header">
+                        <div class="chats-header-left">
+                            <button class="back-btn">‹</button>
+                            <div class="contact-info">
+                                <div class="contact-avatar">JD</div>
+                                <div class="contact-name">James</div>
+                            </div>
+                        </div>
+                        <div class="header-actions">
+                            <button class="header-btn">📹</button>
+                            <button class="header-btn">📞</button>
+                        </div>
+                    </div>
+
+                    <div class="messages-container" id="messagesContainer">
+                        <div class="no-message"><span>Start chatting with</span> <span class="targeted-user"></span></div>
+                        <!-- <div class="message received">
+                            <div class="avatar">JD</div>
+                            <div class="message-bubble">
+                                Hey! How are you doing today?
+                            </div>
+                        </div>
+                        <div class="message-time">2:30 PM</div>
+
+                        <div class="message sent">
+                            <div class="message-bubble">
+                                I'm great! Just working on some projects. How about you?
+                            </div>
+                        </div>
+                        <div class="message-time">2:32 PM</div>
+
+                        <div class="message received">
+                            <div class="avatar">JD</div>
+                            <div class="message-bubble">
+                                Same here! Want to grab coffee later?
+                            </div>
+                        </div>
+                        <div class="message-time">2:35 PM</div> -->
+
+                        <div class="typing-indicator" id="typingIndicator">
+                            <div class="typing-bubble">
+                                <div class="typing-dots">
+                                    <div class="typing-dot"></div>
+                                    <div class="typing-dot"></div>
+                                    <div class="typing-dot"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="attachment-menu" id="attachmentMenu">
+                        <div class="attachment-option" onclick="openCamera()">
+                            <div class="attachment-icon camera-icon">📷</div>
+                            <div class="attachment-text">Camera</div>
+                        </div>
+                        <div class="attachment-option" onclick="openPhotoLibrary()">
+                            <div class="attachment-icon photo-icon">🖼️</div>
+                            <div class="attachment-text">Photo Library</div>
+                        </div>
+                        <div class="attachment-option" onclick="openDocuments()">
+                            <div class="attachment-icon document-icon">📄</div>
+                            <div class="attachment-text">Document</div>
+                        </div>
+                        <div class="attachment-option" onclick="shareLocation()">
+                            <div class="attachment-icon location-icon">📍</div>
+                            <div class="attachment-text">Location</div>
+                        </div>
+                    </div>
+
+                    <div class="input-container">
+                        <div class="input-wrapper">
+                            <button class="attachment-btn" onclick="toggleAttachmentMenu()">+</button>
+                            <textarea class="message-input" id="messageInput" placeholder="Message" rows="1"></textarea>
+                        </div>
+                        <button class="send-btn" id="sendBtn" onclick="sendMessage()">↑</button>
+                    </div>
+
+
+                    <input type="file" class="file-input" id="photoInput" accept="image/*"
+                        onchange="handleFileSelect(event)">
+                    <input type="file" class="file-input" id="documentInput" accept="*/*"
+                        onchange="handleFileSelect(event)">
+                    <input type="file" class="file-input" id="cameraInput" accept="image/*" capture="environment"
+                        onchange="handleFileSelect(event)">
                 </div>
-                <div class="notification-item">
-                    <strong>John Smith</strong> shared your workout motivation post
-                    <div class="post-time">2 hours ago</div>
-                </div>
-                <div class="notification-item">
-                    You have <strong>3 new friend requests</strong>
-                    <div class="post-time">4 hours ago</div>
-                </div>
-                <div class="notification-item">
-                    You have <strong>3 new friend requests</strong>
-                    <div class="post-time">4 hours ago</div>
-                </div>
-                <div class="notification-item">
-                    You have <strong>3 new friend requests</strong>
-                    <div class="post-time">4 hours ago</div>
-                </div>
-            </div> -->
+            </div>
         </div>
+    </div>
     </div>
 
     <script src="/assets/js/apps.js"></script>
     <script src="/assets/js/posts.js"></script>
     <script src="/assets/js/single.js"></script>
+    <script src="/chat/socket.io.min.js"></script>
+    <script src="/assets/js/data.js"></script>
+    <script src="/assets/js/chat.js"></script>
+    <script src="assets/js/userlist.js"></script>
 </body>
 
 </html>

@@ -1,6 +1,6 @@
 /* devnote Style Variables */
 :root {
-    --devnote-blue: #007AFF;
+    --devnote-light-blue: #1f8bff;
     --devnote-gray: #8E8E93;
     --devnote-light-gray: #F2F2F7;
     --devnote-dark-gray: #3A3A3C;
@@ -14,7 +14,7 @@
     --devnote-divider: #2d313b;
 }
 :root.light-mode{
-    --devnote-blue: #007AFF;
+    --devnote-light-blue: #1f8bff;
     --devnote-gray: #8E8E93;
     --devnote-light-gray: #F2F2F7;
     --devnote-dark-gray: #3A3A3C;

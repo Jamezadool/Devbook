@@ -66,7 +66,7 @@ function authenticateToken(req, res, next) {
     });
 }
 
-app.get('/', authenticateToken, (req, res) => {
+app.get('/index.html', authenticateToken, (req, res) => {
     res.json({ success: true, message: `Hello ${req.user.email}` });
 });
 
@@ -80,14 +80,13 @@ app.post('/signup', async (req, res) => {
         if(rows.length > 0) return res.status(409).send({success: false, error: "Email has already been used."});
         //End of check.
 
-        const mailingEmail = email;
+        // const mailingEmail = email;
         //we should send an email to the user before allowing them in.
 
-
-        // const hashedPassword = await bcrypt.hash(password, 10);
-        // //insert the users details into the database.
-        // const result = await pool.execute("INSERT INTO users(name, email, password) VALUES(?, ?, ?)", [username, email, hashedPassword]);
-        // res.status(200).send({success: true, message: "Signup successful, you can now login using your email address."});
+        const hashedPassword = await bcrypt.hash(password, 10);
+        //insert the users details into the database.
+        const result = await pool.execute("INSERT INTO users(username, email, password) VALUES(?, ?, ?)", [username, email, hashedPassword]);
+        res.status(200).send({success: true, message: "Signup successful, you can now login using your email address."});
 
     }catch(err){
         res.status(409).send({success: false, error: err.message});

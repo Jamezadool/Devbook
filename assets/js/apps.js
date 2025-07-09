@@ -1,4 +1,4 @@
-
+//Add a token to the head of this file so anytime users login it would confirm from the database to allow them and if not for example they went into the index page directly it should stop them and throw them out... you know what, don't do that. make the posts be viewable, like they can use the homepage but won't be able to comment or read comment, as they haven't logged in, just give them like 20posts to view and ask them to login to access more function.
 function showPage(pageId) {
     // Hide all pages
     const pages = document.querySelectorAll('.page');
@@ -98,7 +98,7 @@ toggler.addEventListener("click", () => {
 //load user theme on window load;
 function loadTheme() {
     const theme = localStorage.getItem('theme') === 'light';
-    document.documentElement.classList.add(theme ? 'light-mode' : 'dark-mode');
+    document.documentElement.classList.add(theme ? 'light-mode' : '');
     toggle.style.marginLeft = document.documentElement.classList.contains('light-mode') ? '0' : '50%';
     toggle.style.background = document.documentElement.classList.contains('light-mode') ? 'var(--devnote-gray)' : 'var(--devnote-blue)';
     toggle.style.boxShadow = document.documentElement.classList.contains('light-mode') ? 'unset' : '0 0 10px var(--devnote-blue),0 0 20px var(--devnote-blue)';
@@ -157,3 +157,37 @@ function commentBtn() {
     });
 }
 commentBtn();
+//this will make the messaging on pc / larger screen not show in a differnt page, but comedown in a dropdown on the right;
+const messageDiv = document.querySelector('.chat-message');
+document.querySelectorAll('.message-chat').forEach(button => {
+    button.addEventListener("click", () => {
+        messageDiv.classList.toggle('active');
+        button.style.background = messageDiv.classList.contains('active') ? 'var(--devnote-blue)' : '';
+        // Update nav icons
+        const navIcons = document.querySelectorAll('.nav-icon');
+        navIcons.forEach(icon => icon.classList.remove('active'));
+        askusername();
+        localStorage.getItem("targetuser");
+    });
+});
+
+//close the message interface if anyother btn is clicked.. i cant get it to work for all btns, so i made it work for smaller screens only.
+document.addEventListener("click", (e) => {
+    const deviceWidth = document.documentElement.clientWidth;
+    if (deviceWidth < 530) {
+        const navIcons = document.querySelectorAll('.nav-icon');
+        navIcons.forEach(icons => {
+            const messageBtn = document.querySelector(".mobile-message");
+            if (icons.contains(e.target) && e.target !== messageBtn) {
+                messageDiv.classList.remove(messageDiv.classList.contains('active') ? 'active' : 'active');
+                messageBtn.style.background = messageDiv.classList.contains('active') ? 'var(--devnote-blue)' : '';
+            }
+        })
+    }
+})
+
+//to make each userlist open up the messaging interface
+const chatsContainer = document.querySelector('.chats-container');
+document.querySelector('.back-btn').addEventListener('click', () => {
+    chatsContainer.classList.remove('open-message');
+});

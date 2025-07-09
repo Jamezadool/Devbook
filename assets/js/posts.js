@@ -8,7 +8,8 @@ postsOptions.forEach(options => {
     })
 })
 
-function handleFileSelect(event){
+//Read the file and make it addable to the ui
+function handlePostFileSelect(event){
     const file = event.target.files[0];
     if(!file) return;
 
@@ -24,6 +25,7 @@ function handleFileSelect(event){
     fileContainer.classList.add('active');
 }
 
+//Create a div to contain the selected image on the ui
 function addImageToPost(src, name){
     const div = document.createElement('div');
     div.className = "image-post"
@@ -36,11 +38,12 @@ function addImageToPost(src, name){
 
 fileSecondContainer.addEventListener("click", (e) => {
     if(e.target.classList.contains('delbtn')){
-        const img = e.target.closest('.image-post');
-        img.remove();
+        const img = e.target.closest('.image-post');// this gets the closest parent to the element, thats if i didn't pass any thing in the ()
+        img.remove(); // the remove function removes the element;
     }
-})
+});
 
+//Creates a div to contain the selected file on the ui
 function addFileToPost(name, size){
     const div = document.createElement('div');
     div.className = "image-post"
@@ -54,15 +57,11 @@ function addFileToPost(name, size){
                     </div>`
     fileSecondContainer.appendChild(div);
 }
-
+//This gets the file size so it can be shown in the ui. for files only.
 function formatFileSize(bytes) {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-}
-function deleteFile(){
-    // const fileToBeDeleted = this.dataset.index; an error doesnt work
-    //find a way to get the deletebtn to delete the element. maybe we have to create an array where the images/file stay then loop through it then have it removeable. hehe... like the one you did in the e-commerce site;    
 }

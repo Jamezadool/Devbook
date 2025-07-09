@@ -1,3 +1,4 @@
+@import url('/assets/css/style.css');
 * {
     margin: 0;
     padding: 0;
@@ -6,8 +7,8 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
-    background-color: #0d1117;
-    color: #f0f6fc;
+    background: var(--devnote-primary);
+    color: var(--devnote-text);
     line-height: 1.5;
 }
 
@@ -19,15 +20,16 @@ body {
     justify-content: center;
     padding: 16px;
 }
-
+/* .container h3{
+    color:var(--devnote-blue);
+} */
 .auth-form {
-    background-color: #161b22;
-    border: 1px solid #30363d;
+    background: var(--devnote-accent);
     border-radius: 12px;
     padding: 32px;
     width: 100%;
-    max-width: 360px;
-    box-shadow: 0 8px 24px rgba(1, 4, 9, 0.15);
+    max-width: 390px;
+    box-shadow: var(--shadow);
 }
 
 .form-title {
@@ -35,7 +37,11 @@ body {
     font-weight: 300;
     text-align: center;
     margin-bottom: 20px;
-    color: #f0f6fc;
+    color: var(--devnote-text);
+}
+.form-title span{
+    font-weight:600;
+    color: var(--devnote-blue);
 }
 
 .form-group {
@@ -46,7 +52,7 @@ body {
     display: block;
     font-size: 14px;
     font-weight: 600;
-    color: #f0f6fc;
+    color: var(--devnote-text);
     margin-bottom: 8px;
 }
 
@@ -54,17 +60,17 @@ body {
     width: 100%;
     padding: 12px;
     font-size: 14px;
-    background-color: #0d1117;
-    border: 1px solid #30363d;
+    background: var(--devnote-primary);
+    border: none;
     border-radius: 6px;
-    color: #f0f6fc;
+    color: var(--devnote-text);
     transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .form-input:focus {
     outline: none;
     border-color: #1f6feb;
-    background-color: #0d1117;
+    background: var(--devnote-primary);
     border: 1px solid #30363d;
     box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.3);
 }
@@ -88,12 +94,12 @@ body {
 }
 
 .btn-primary {
-    background-color: #238636;
+    background: var(--devnote-blue);
     color: #ffffff;
 }
 
 .btn-primary:hover {
-    background-color: #2ea043;
+    background: var(--devnote-light-blue);
 }
 
 .btn-primary:active {
@@ -103,12 +109,13 @@ body {
 .btn-secondary {
     background-color: transparent;
     color: #1f6feb;
-    border: 1px solid #30363d;
+    border: 1px solid var(--devnote-gray);
+    transition: all .3s ease-in-out;
 }
 
 .btn-secondary:hover {
-    background-color: #f6f8fa;
-    color: #24292f;
+    background: var(--davnote-accent);
+    color: var(--devnote-text);
 }
 
 .divider {
@@ -128,9 +135,9 @@ body {
 }
 
 .divider span {
-    background-color: #161b22;
+    background: var(--devnote-accent);
     padding: 0 16px;
-    color: #7d8590;
+    color: var(--devnote-text);
     font-size: 12px;
 }
 
@@ -168,13 +175,13 @@ body {
     margin-top: 24px;
     padding: 16px;
     text-align: center;
-    border: 1px solid #30363d;
+    border: 1px solid var(--devnote-gray);
     border-radius: 6px;
-    background-color: #0d1117;
+    background: var(--devnote-primary);
 }
 
 .signup-prompt p {
-    color: #f0f6fc;
+    color: var(--devnote-text);
     font-size: 14px;
     margin-bottom: 8px;
 }
@@ -190,7 +197,7 @@ body {
     padding: 12px;
     background: none;
     border: none;
-    color: #7d8590;
+    color: var(--devnote-text);
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -199,12 +206,12 @@ body {
 }
 
 .tab-button.active {
-    color: #f0f6fc;
-    border-bottom-color: #fd7e14;
+    color: var(--devnote-text);
+    border-bottom-color: var(--devnote-blue);
 }
 
 .tab-button:hover {
-    color: #f0f6fc;
+    color: var(--devnote-text);
 }
 
 .tab-content {
@@ -326,7 +333,7 @@ body {
 .code input[ type = submit]
 {
     width: 100%;
-    background:#0d1117;
+    background: var(--devnote-primary);
     color: #e3e3e3;
     height:50px;
     border:none;
