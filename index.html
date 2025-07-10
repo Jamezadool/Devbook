@@ -33,7 +33,7 @@
                 <div class="nav-icon" onclick="showPage('marketplace')" title="Marketplace">🛍️</div>
             </div>
             <div class="nav-icons">
-                <div class="nav-icon message-chat" title="Messages">💬</div>
+                <div class="nav-icon message-chat" title="DevChats">💬</div>
                 <div class="nav-icon" onclick="showPage('notifications')" title="Notifications">🔔</div>
                 <div class="nav-icon" onclick="showPage('profile')" title="Profile">👤</div>
             </div>
@@ -42,26 +42,32 @@
             <div class="mobile-middle">
                 <div class="nav-action nav-icon active" onclick="showPage('home')" title="Home">🏠</div>
                 <div class="nav-icon" onclick="showPage('pbl')" title="project based learning">📋</div>
-                <!-- <div class="nav-icon" onclick="showPage('messages')" title="Messages">💬</div> -->
-                 <div class="nav-icon message-chat mobile-message" title="Messages">💬</div>
+                <div class="nav-icon message-chat mobile-message" title="DevChats">💬</div>
                 <div class="nav-icon" onclick="showPage('notifications')" title="Notifications">🔔</div>
                 <div class="nav-icon" onclick="showPage('marketplace')" title="Marketplace">🛍️</div>
-                <div class="nav-icon" onclick="showPage('profile')" title="Profile">👤</div>
+                <!-- <div class="nav-icon" onclick="showPage('profile')" title="Profile">👤</div> -->
             </div>
         </div>
     </div>
 
     <div class="main-container">
+        <div class="create-post-default-btn">+</div>
         <!-- Sidebar -->
         <div class="sidebar">
             <div class="sidebar-section">
+                <div class="sidebar-header">
+                    <div class="header-sidebar-header">
+                        <img src="/image/profile.png" alt="user profile" class="user-profile"
+                            onclick="showPage('profile')">
+                        <div class="username-container">
+                            <div class="username" onclick="showPage('profile')">Bob Johan</div>
+                            <div class="user-id" onclick="showPage('profile')">@bobjohan</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="sidebar-item active" onclick="showPage('home')">
                     <div class="sidebar-icon" style="background: #e3f2fd; color: #1976d2;">🏠</div>
                     <div class="sidebar-text">News Feed</div>
-                </div>
-                <div class="sidebar-item message-chat">
-                    <div class="sidebar-icon" style="background: #f3e5f5; color: #7b1fa2;">💬</div>
-                    <div class="sidebar-text">Messages</div>
                 </div>
                 <div class="sidebar-item" onclick="showPage('marketplace')">
                     <div class="sidebar-icon" style="background: #e8f5e8; color: #388e3c;">🛍️</div>
@@ -81,38 +87,25 @@
                 </div>
                 <div class="sidebar-item settings">
                     <div class="sidebar-icon" style="background: #e8f5e8; color: #388e3c;">⚙️</div>
-                    <div class="sidebar-text">Settings & Privacy</div>
+                    <div class="sidebar-text">Settings & Support</div>
                 </div>
                 <div class="settings-dropdown">
                     <div class="settings-item">
                         <div class="settings-icon" style="background: #e8f5e8; color: #388e3c;">⚙️</div>
-                        <div class="settings-text">Settings</div>
+                        <div class="settings-text">Settings & Privacy</div>
                     </div>
                     <div class="theme-controller">
                         <div class="theme-icon" style="background: #e8f5e8; color: #388e3c;">☀️</div>
                         <div class="sidebar-text theme-text">Dark Mode</div>
-
                         <div class="toggle">
                             <div></div>
                         </div>
                     </div>
+                    <div class="settings-item">
+                        <div class="settings-icon" style="background: #e8f5e8; color: #388e3c;">❔</div>
+                        <div class="settings-text">Help Center</div>
+                    </div>
                 </div>
-                <!-- <div class="sidebar-item" onclick="showPage('groups')">
-                    <div class="sidebar-icon" style="background: #fff3e0; color: #f57c00;">👥</div>
-                    <div class="sidebar-text">Groups</div>
-                </div>
-                <div class="sidebar-item">
-                    <div class="sidebar-icon" style="background: #fce4ec; color: #c2185b;">⚡</div>
-                    <div class="sidebar-text">Events</div>
-                </div>
-                <div class="sidebar-item">
-                    <div class="sidebar-icon" style="background: #e1f5fe; color: #0097a7;">📺</div>
-                    <div class="sidebar-text">Watch</div>
-                </div>
-                <div class="sidebar-item">
-                    <div class="sidebar-icon" style="background: #f9fbe7; color: #689f38;">📱</div>
-                    <div class="sidebar-text">Gaming</div>
-                </div> -->
             </div>
         </div>
 
@@ -121,133 +114,78 @@
             <!-- Home Page -->
             <div id="home" class="page active">
                 <!-- Create Post -->
-                <div class="create-post">
-                    <div class="create-post-header">
-                        <img src="/image/profile.png" alt="user profile image" width="100%"
-                            onclick="showPage('profile')">
-                        <textarea class="post-input" placeholder="What's on your mind?" autocorrect="on"></textarea>
-                    </div>
-                    <div class="inputed-files">
-                        <div class="inputed-file">
-
+                <form class="posts-form">
+                    <div class=" create-post" id="create-post">
+                        <div class="create-post-header">
+                            <img src="/image/profile.png" alt="user profile image" width="100%"
+                                onclick="showPage('profile')">
+                            <textarea class="post-input" placeholder="What's on your mind?" autocorrect="on"></textarea>
                         </div>
-                    </div>
-                    <div class="post-actions">
-                        <div class="post-options">
-                            <input type="file" name="post-input-photo" id="post-input-photo" accept="image/*"
-                                style="display:none;" onchange="handlePostFileSelect(event)">
-                            <input type="file" name="post-input-photo" id="post-input-file" accept="*/*"
-                                style="display:none;" onchange="handlePostFileSelect(event)">
-                            <input type="file" name="post-input-photo" id="post-input-code" accept="*/*"
-                                style="display:none;">
-                            <div class="post-option" data-file="post-input-photo">📷 <span>Photo </span></div>
-                            <div class="post-option" data-file="post-input-file">🎥 <span>Files</span></div>
-                            <div class="post-option" data-file="post-input-code">👨‍💻 <span>Codes</span>
+                        <div class="inputed-files">
+                            <div class="inputed-file">
+
                             </div>
                         </div>
-                        <button class="post-btn">Post</button>
+                        <div class="post-actions">
+                            <div class="post-options">
+                                <input type="file" name="post-input-photo" id="post-input-photo" accept="image/*"
+                                    style="display:none;" onchange="handlePostFileSelect(event)">
+                                <input type="file" name="post-input-photo" id="post-input-file" accept="*/*"
+                                    style="display:none;" onchange="handlePostFileSelect(event)">
+                                <input type="file" name="post-input-photo" id="post-input-code" accept="*/*"
+                                    style="display:none;">
+                                <div class="post-option" data-file="post-input-photo">📷 <span>Photo </span></div>
+                                <div class="post-option" data-file="post-input-file">🎥 <span>Files</span></div>
+                                <div class="post-option" data-file="post-input-code">👨‍💻 <span>Codes</span>
+                                </div>
+                            </div>
+                            <button class="post-btn">Post</button>
+                        </div>
                     </div>
-                </div>
+                </form>
 
                 <!-- Posts -->
-                <div class="post">
-                    <div class="post-header">
-                        <div class="avatar">JS</div>
-                        <div class="post-info">
-                            <h3>John Smith</h3>
-                            <div class="post-time">2 hours ago</div>
-                        </div>
-                    </div>
-                    <div class="show-single">
-                        <div class="post-content-container">
-                            <div class="post-content more">
-                                Just finished an amazing workout session! 💪 Feeling energized and ready to tackle the
-                                week
-                                ahead. Remember, consistency is key to achieving your fitness goals!
-                                <span class="see-more">...See More</span>
+                <div id="posts-home">
+                    <!-- <div class="post">
+                        <div class="posts-container">
+                            <div class="avatar">JS</div>
+                            <div class="main-post-content">
+                                <div class="post-header">
+                                    <div class="post-info">
+                                        <h3>John Smith</h3>
+                                        <h3>@Johnsmith</h3>
+                                        <div class="post-time">2 hours ago</div>
+                                    </div>
+                                </div>
+                                <div class="show-single">
+                                    <div class="post-content-container">
+                                        <div class="post-content more">
+                                            Just finished an amazing workout session! 💪 Feeling energized and ready to
+                                            tackle the week ahead. Remember, consistency is key to achieving your
+                                            fitness goals! Just finished an amazing workout session! 💪 Feeling
+                                            energized and ready to tackle the week ahead. Remember, consistency is key
+                                            to achieving your fitness goals! This is additional text to make it longer
+                                            and test the see more functionality. Keep pushing yourself and never give up
+                                            on your dreams and aspirations.
+                                        </div>
+                                        <button class="see-more">...See More</button>
+                                    </div>
+                                    <div class="post-image">🏋️‍♂️</div>
+                                </div>
                             </div>
                         </div>
-                        <div class="post-image">🏋️‍♂️</div>
-                    </div>
-                    <div class="post-actions-bar">
-                        <div class="post-action" data-liked="false">
-                            <div class="emoji-liked">👍</div> <span>Upvote</span>
-                        </div>
-                        <div class="post-action" data-comment="false">
-                            <div class="emoji">💬</div> <span>Comment</span>
-                        </div>
-                        <div class="post-action">
-                            <div class="emoji">📤</div> <span>Share</span>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="post">
-                    <div class="post-header">
-                        <div class="avatar" style="background: linear-gradient(135deg, #ff6b6b, #ff8e8e);">EM</div>
-                        <div class="post-info">
-                            <h3>Emma Martinez</h3>
-                            <div class="post-time">4 hours ago</div>
-                        </div>
-                    </div>
-                    <div class="show-single">
-                        <div class="post-content-container">
-                            <div class="post-content">
-                                Beautiful sunset from my evening walk today 🌅 Nature has a way of putting everything
-                                into
-                                perspective. Taking time to appreciate the little moments.
-                                <span class="see-more">...See More</span>
+                        <div class="post-actions-bar">
+                            <div class="post-action" data-liked="false">
+                                <div class="emoji-liked">👍</div> <span>Upvote</span>
+                            </div>
+                            <div class="post-action" data-comment="false">
+                                <div class="emoji">💬</div> <span>Comment</span>
+                            </div>
+                            <div class="post-action">
+                                <div class="emoji">📤</div> <span>Share</span>
                             </div>
                         </div>
-                        <div class="post-image">🌅</div>
-                    </div>
-                    <div class="post-actions-bar">
-                        <div class="post-action" data-liked="false">
-                            <div class="emoji-liked">👍</div> <span>Upvote</span>
-                        </div>
-                        <div class="post-action" data-comment="false">
-                            <div class="emoji">💬</div> <span>Comment</span>
-                        </div>
-                        <div class="post-action">
-                            <div class="emoji">📤</div> <span>Share</span>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="post">
-                    <div class="post-header">
-                        <div class="avatar" style="background: linear-gradient(135deg, #4ecdc4, #44a08d);">AL</div>
-                        <div class="post-info">
-                            <h3>Alex Lee</h3>
-                            <div class="post-time">6 hours ago</div>
-                        </div>
-                    </div>
-                    <div class="show-single">
-                        <div class="post-content-container">
-                            <div class="post-content">
-                                Excited to share that I just launched my new project! 🚀 It's been months of hard work,
-                                but
-                                seeing it come to life makes it all worth it. Thanks to everyone who supported me along
-                                the
-                                way!
-                                <span class="see-more">...See More</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="post-actions-bar">
-                        <div class="post-action" data-liked="false">
-                            <div class="emoji-liked">👍</div> <span>Upvote</span>
-                        </div>
-                        <div class="post-action" data-comment="false">
-                            <div class="emoji">💬</div> <span>Comment</span>
-                        </div>
-                        <div class="post-action">
-                            <div class="emoji">📤</div> <span>Share</span>
-                        </div>
-                    </div>
-
+                    </div> -->
                 </div>
             </div>
 
@@ -311,7 +249,8 @@
                         <div class="comments-list" id="commentsList">
                             <div class="comment">
                                 <div class="comment-avatar"
-                                    style="background: linear-gradient(45deg, #e74c3c, #f39c12);">JS</div>
+                                    style="background: linear-gradient(45deg, #e74c3c, #f39c12);">JS
+                                </div>
                                 <div class="comment-content">
                                     <div class="comment-header">
                                         <div class="comment-username">Jessica Smith</div>
@@ -328,7 +267,8 @@
 
                             <div class="comment">
                                 <div class="comment-avatar"
-                                    style="background: linear-gradient(45deg, #2ecc71, #3498db);">MJ</div>
+                                    style="background: linear-gradient(45deg, #2ecc71, #3498db);">MJ
+                                </div>
                                 <div class="comment-content">
                                     <div class="comment-header">
                                         <div class="comment-username">Mike Johnson</div>
@@ -344,7 +284,8 @@
 
                             <div class="comment">
                                 <div class="comment-avatar"
-                                    style="background: linear-gradient(45deg, #9b59b6, #e67e22);">SW</div>
+                                    style="background: linear-gradient(45deg, #9b59b6, #e67e22);">SW
+                                </div>
                                 <div class="comment-content">
                                     <div class="comment-header">
                                         <div class="comment-username">Sarah Wilson</div>
@@ -419,19 +360,26 @@
                 </div>
 
                 <div class="post">
-                    <div class="post-header">
-                        <div class="avatar">YN</div>
-                        <div class="post-info">
-                            <h3>Your Name</h3>
-                            <div class="post-time">1 day ago</div>
-                        </div>
-                    </div>
-                    <div class="post-content-container">
-                        <div class="post-content">
-                            Working on some exciting new features for my latest project! Can't wait to share more
-                            details
-                            soon. 🚀✨
-                            <span class="see-more">...See More</span>
+                    <div class="posts-container">
+                        <div class="avatar">JS</div>
+                        <div class="main-post-content">
+                            <div class="post-header">
+                                <div class="post-info">
+                                    <h3>John Smith</h3>
+                                    <h3>@Johnsmith</h3>
+                                    <div class="post-time">2 hours ago</div>
+                                </div>
+                            </div>
+                            <div class="show-single">
+                                <div class="post-content-container">
+                                    <div class="post-content more">
+                                        Just finished an amazing workout session! 💪 Feeling energized and ready to
+                                        tackle the week
+                                        ahead. Remember, consistency is key to achieving your goals!
+                                        <span class="see-more">...See More</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="post-actions-bar">
@@ -604,7 +552,7 @@
             <div class="chats-container">
                 <div class="chat-lists">
                     <div class="chat-lists-header">
-                        <h3>Chats</h3>
+                        <h3>DevChats</h3>
                         <div class="chat-lists-action">
                             <button>.</button>
                             <button>.</button>
@@ -701,7 +649,8 @@
                     </div>
 
                     <div class="messages-container" id="messagesContainer">
-                        <div class="no-message"><span>Start chatting with</span> <span class="targeted-user"></span></div>
+                        <div class="no-message"><span>Start chatting with</span> <span class="targeted-user"></span>
+                        </div>
                         <!-- <div class="message received">
                             <div class="avatar">JD</div>
                             <div class="message-bubble">
@@ -774,7 +723,7 @@
             </div>
         </div>
     </div>
-    </div>
+    <!-- </div> -->
 
     <script src="/assets/js/apps.js"></script>
     <script src="/assets/js/posts.js"></script>

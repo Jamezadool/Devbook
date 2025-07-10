@@ -88,6 +88,7 @@ document.getElementById('login-form').addEventListener('submit', async function 
         loginBtn.disabled = true;
         const response = await res.json();
         if (response.success) {
+            localStorage.setItem('token', response.token); 
             window.location.href = "/index.html";
         } else {
             loginError.innerHTML = response.error;

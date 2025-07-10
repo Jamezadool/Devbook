@@ -1,4 +1,44 @@
-//Add a token to the head of this file so anytime users login it would confirm from the database to allow them and if not for example they went into the index page directly it should stop them and throw them out... you know what, don't do that. make the posts be viewable, like they can use the homepage but won't be able to comment or read comment, as they haven't logged in, just give them like 20posts to view and ask them to login to access more function.
+document.addEventListener('DOMContentLoaded', async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        location.href = '/auth/index.html';
+        return;
+    }
+
+    try {
+        const res = await fetch('http://localhost:3000/authorize', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!res.ok) {
+            // Handle 401/403 status codes
+            throw new Error("Not authorized");
+        }
+
+        const data = await res.json();
+        if (!data.success) {
+            throw new Error("Invalid auth");
+        }
+
+        console.log("Authenticated");
+
+    } catch (err) {
+        console.warn("Auth failed:", err.message);
+        location.href = '/auth/index.html';
+    }
+});
+
+
+// Scrolling windows to the top. 
+const postScrollBtn = document.querySelector('.create-post-default-btn');
+postScrollBtn.addEventListener("click", scrollToTop);
+function scrollToTop() {
+    scrollTo({ top: 0, behavior: 'smooth' });
+    document.querySelector('.post-input').focus();
+};
+
 function showPage(pageId) {
     // Hide all pages
     const pages = document.querySelectorAll('.page');
@@ -39,41 +79,51 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
     });
-
-    // Post button functionality
-    const postBtn = document.querySelector('.post-btn');
-    const postInput = document.querySelector('.post-input');
-
-    postBtn.addEventListener('click', function () {
-        if (postInput.value.trim()) {
-            // Create new post (simplified)
-            alert('Post created successfully! 🎉');
-            postInput.value = '';
-        }
-    });
 });
 
-const postsContent = document.querySelectorAll('.post-content-container');
 function checkOverflow() {
+    const postsContent = document.querySelectorAll('.post-content-container');
+
     postsContent.forEach(content => {
         const postText = content.querySelector('.post-content');
-        const parent = content.offsetHeight;
         const moreBtn = content.querySelector('.see-more');
-        const child = postText.scrollHeight;
-        const evaluation = child > parent;
-        // console.log(`Parent: ${parent}, Child: ${postText.scrollHeight}`)
-        moreBtn.style.display = evaluation ? 'inline' : 'none';
-        // console.log(evaluation ? 'Greater' : ' Lesser');
-        postText.addEventListener("click", function () {
-            // alert("clicked");
-            this.classList.toggle('expanded');
-            const classContain = this.classList.contains('expanded');
-            moreBtn.textContent = classContain ? '...See Less' : '...See More';
-        })
-    })
+
+        // Remove any existing click listeners
+        postText.removeEventListener('click', toggleExpand);
+        moreBtn.removeEventListener('click', toggleExpand);
+
+        // Reset to collapsed state
+        postText.classList.remove('expanded');
+
+        // Use a more reliable method to check if text is clamped
+        const isTextClamped = postText.scrollHeight > postText.clientHeight;
+
+        if (isTextClamped) {
+            moreBtn.style.display = 'inline-block';
+            moreBtn.textContent = '...See More';
+        } else {
+            moreBtn.style.display = 'none';
+        }
+
+        // Add click listeners
+        function toggleExpand(e) {
+            e.preventDefault();
+            postText.classList.toggle('expanded');
+            const isExpanded = postText.classList.contains('expanded');
+            moreBtn.style.display = isExpanded ? 'none' : 'inline';
+        }
+
+        postText.addEventListener('click', toggleExpand);
+        moreBtn.addEventListener('click', toggleExpand);
+    });
 }
+
+// Run after DOM is loaded and after a short delay to ensure CSS is applied
+document.addEventListener('DOMContentLoaded', function () {
+    setTimeout(checkOverflow, 100);
+});
+
 window.addEventListener('resize', checkOverflow);
-window.addEventListener('DOMContentLoaded', checkOverflow)
 
 const sideBar = document.querySelector(".sidebar");
 const menuBtn = document.querySelector(".menu-icon");
@@ -82,7 +132,16 @@ menuBtn.addEventListener("click", function () {
     sideBar.classList.toggle('active');
     const showedSideBar = sideBar.classList.contains('active');
     menuBtn.textContent = showedSideBar ? 'x' : '=';
-})
+});
+
+//close the sidebar if users clicks anywhere outside of it
+document.addEventListener("click", (event) => {
+    if (!sideBar.contains(event.target) && event.target !== menuBtn) {
+        sideBar.classList.remove('active');
+        const showedSideBar = sideBar.classList.contains('active');
+        menuBtn.textContent = showedSideBar ? 'x' : '=';
+    }
+});
 
 //theme handler
 const toggler = document.querySelector('.theme-controller');
@@ -105,21 +164,12 @@ function loadTheme() {
 }
 window.addEventListener("DOMContentLoaded", loadTheme);
 
-//close the sidebar if users clicks anywhere outside of it
-document.addEventListener("click", (event) => {
-    if (!sideBar.contains(event.target) && event.target !== menuBtn) {
-        sideBar.classList.remove('active');
-        const showedSideBar = sideBar.classList.contains('active');
-        menuBtn.textContent = showedSideBar ? 'x' : '=';
-    }
-});
 //open the settings div
 const settings = document.querySelector('.settings');
 const settingsDropdown = document.querySelector('.settings-dropdown');
 
 settings.addEventListener("click", () => {
     settingsDropdown.classList.toggle('active');
-
     settings.style.background = settingsDropdown.classList.contains('active') ? 'var(--devnote-accent)' : 'var(--devnote-primary)';
 });
 
@@ -157,12 +207,19 @@ function commentBtn() {
     });
 }
 commentBtn();
+
+//get the header for future use
+const header = document.querySelector('.header');
 //this will make the messaging on pc / larger screen not show in a differnt page, but comedown in a dropdown on the right;
 const messageDiv = document.querySelector('.chat-message');
 document.querySelectorAll('.message-chat').forEach(button => {
     button.addEventListener("click", () => {
         messageDiv.classList.toggle('active');
         button.style.background = messageDiv.classList.contains('active') ? 'var(--devnote-blue)' : '';
+        const deviceWidth = document.documentElement.clientWidth;
+        if (deviceWidth < 530) {
+            header.style.display = messageDiv.classList.contains('active') ? 'none' : 'block';
+        }
         // Update nav icons
         const navIcons = document.querySelectorAll('.nav-icon');
         navIcons.forEach(icon => icon.classList.remove('active'));
@@ -181,6 +238,7 @@ document.addEventListener("click", (e) => {
             if (icons.contains(e.target) && e.target !== messageBtn) {
                 messageDiv.classList.remove(messageDiv.classList.contains('active') ? 'active' : 'active');
                 messageBtn.style.background = messageDiv.classList.contains('active') ? 'var(--devnote-blue)' : '';
+                header.style.display = messageDiv.classList.contains('active') ? 'block' : 'block';
             }
         })
     }
