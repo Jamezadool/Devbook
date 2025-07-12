@@ -163,5 +163,5 @@ app.post("/comment", authenticateToken, async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Connection started at http://localhost:${port}`);
+    console.log(`Server listening on port ${port}`);
 });
