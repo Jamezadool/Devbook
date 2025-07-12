@@ -71,6 +71,7 @@ app.post("/login", async (req, res) => {
         res.json({ success: true, token });
 
     } catch (err) {
+        console.error('Login error:', err);  // log full error
         res.status(500).json({ success: false, error: err.message });
     }
 });
@@ -90,6 +91,7 @@ app.post('/signup', async (req, res) => {
         res.status(200).json({ success: true, message: "Signup successful, you can now login using your email address." });
 
     } catch (err) {
+        console.error('Login error:', err);  // log full error
         res.status(500).json({ success: false, error: err.message });
     }
 });
@@ -109,6 +111,7 @@ app.post('/post', authenticateToken, async (req, res) => {
         );
         res.status(200).json({ success: true, message: "Post created" });
     } catch (err) {
+        console.error('Login error:', err);  // log full error
         res.status(500).json({ success: false, error: err.message });
     }
 });
@@ -125,6 +128,7 @@ app.get('/posts', async (req, res) => {
         `);
         res.json({ success: true, posts: rows });
     } catch (err) {
+        console.error('Login error:', err);  // log full error
         res.status(500).json({ success: false, error: err.message });
     }
 });
@@ -143,6 +147,7 @@ app.get('/post/:id', async(req, res) => {
 
         res.status(200).json({success: true, post, commentsData});
     }catch(err){
+        console.error('Login error:', err);  // log full error
         res.status(500).json({success: false, error: err.message});
     }
 });
@@ -158,6 +163,7 @@ app.post("/comment", authenticateToken, async (req, res) => {
         await pool.execute("INSERT INTO comments(post_id, user_id, content) VALUES(?, ?, ?)", [postId, userId, content]);
         res.status(200).send({success: true, message: "Comment Posted"});
     }catch(err){
+        console.error('Login error:', err);  // log full error
         res.status(500).send({success: false, error: err.message});
     }
 });
