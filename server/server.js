@@ -171,3 +171,10 @@ app.post("/comment", authenticateToken, async (req, res) => {
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
+
+process.on('unhandledRejection', (reason) => {
+  console.error('Unhandled Rejection:', reason);
+});
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+});
