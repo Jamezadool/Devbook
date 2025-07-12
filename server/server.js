@@ -116,8 +116,6 @@ app.post('/post', authenticateToken, async (req, res) => {
     }
 });
 
-
-
 app.get('/posts', async (req, res) => {
     const limit = parseInt(req.query.limit) || 5;
     const offset = parseInt(req.query.offset) || 0;
@@ -136,7 +134,6 @@ app.get('/posts', async (req, res) => {
         res.status(500).json({ success: false, error: err.message });
     }
 });
-
 
 
 //thid fetchs the post and comment for single page post and comment
