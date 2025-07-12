@@ -18,6 +18,10 @@ const pool = mysql.createPool({
     connectionLimit: 20,
     queueLimit: 0
 });
+app.get('/my-ip', (req, res) => {
+  const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+  res.send(`Render IP: ${ip}`);
+});
 
 app.use(express.json());
 
