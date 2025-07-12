@@ -119,19 +119,24 @@ app.post('/post', authenticateToken, async (req, res) => {
 
 
 app.get('/posts', async (req, res) => {
+    const limit = parseInt(req.query.limit) || 5;
+    const offset = parseInt(req.query.offset) || 0;
+
     try {
         const [rows] = await pool.execute(`
             SELECT posts.id, posts.content, posts.image_url, posts.created_at, users.username
             FROM posts
             JOIN users ON posts.user_id = users.id
             ORDER BY posts.created_at DESC
-        `);
+            LIMIT ? OFFSET ?
+        `, [limit, offset]);
+
         res.json({ success: true, posts: rows });
     } catch (err) {
-        console.error('Login error:', err);  // log full error
         res.status(500).json({ success: false, error: err.message });
     }
 });
+
 
 
 //thid fetchs the post and comment for single page post and comment
