@@ -167,7 +167,31 @@ app.post("/comment", authenticateToken, async (req, res) => {
         res.status(500).send({success: false, error: err.message});
     }
 });
+//get username
+app.get('/me', authenticateToken, async (req, res) => {
+    const userId = req.user.id;
 
+    try {
+        const [rows] = await pool.execute(`
+            SELECT u.username, p.full_name
+            FROM users u
+            LEFT JOIN profiles p ON u.id = p.user_id
+            WHERE u.id = ?
+        `, [userId]);
+
+        if (rows.length === 0) {
+            return res.status(404).json({ success: false, error: 'User not found' });
+        }
+
+        res.json({
+            success: true,
+            username: rows[0].username,
+            full_name: rows[0].full_name
+        });
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
