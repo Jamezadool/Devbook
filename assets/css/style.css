@@ -33,7 +33,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* user-select: none; */
+    user-select: none;
 }
 
 ::-webkit-scrollbar {
@@ -77,6 +77,7 @@ body {
     z-index: 1000;
 }
 
+
 .header {
     background: var(--devnote-accent);
     backdrop-filter: blur(20px);
@@ -86,6 +87,11 @@ body {
     align-items: center;
     justify-content: space-between;
     gap: 20px;
+}
+.header.mobile-message{
+    height:0;
+    overflow:hidden;
+    padding:0;
 }
 
 .header-left {
@@ -118,6 +124,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    position:relative;
 }
 
 .search-input {
@@ -141,7 +148,7 @@ body {
 .search-icon {
     position: absolute;
     right: 12px;
-    top: 50%;
+    top: 60%;
     transform: translateY(-50%);
     color: var(--devnote-gray);
 }
@@ -166,7 +173,7 @@ body {
     justify-content: flex-end;
 }
 
-.nav-icon {
+.nav-icon,.mobile-message {
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -342,6 +349,7 @@ body {
     justify-content: center;
     margin-right: 12px;
     font-size: 16px;
+    color: var(--devnote-text);
 }
 
 .settings-text {
@@ -613,6 +621,7 @@ body {
     color: var(--devnote-text);
 }
 
+
 .post-option:hover {
     background: var(--devnote-primary);
 }
@@ -666,10 +675,21 @@ body {
     display: flex;
     gap: 10px;
 }
+.post-info-header{
+    display:flex;
+    gap:5px;
+    align-items: center;
+}
+/* .verified{
+    width:15px;
+    height:13px;
+    border-radius:50%;
+} */
 
 .avatar {
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
+    min-width:30px;
     border-radius: 50%;
     background: linear-gradient(135deg, var(--devnote-blue), #42a5f5);
     display: flex;
@@ -682,13 +702,14 @@ body {
 
 .main-post-content {
     width:90%;
-    max-width: 90%;
+    max-width: 89%;
 }
 
 .post-info h3 {
     font-size: 15px;
     font-weight: 600;
     color: var(--devnote-text);
+    margin:0;
 }
 
 .post-info h3:nth-child(2) {
@@ -779,6 +800,20 @@ body {
     font-size: 14px;
     font-weight: 500;
     color: var(--devnote-gray);
+    position:relative;
+}
+.post-action .emoji, .post-action .emoji-liked{
+    /* position:absolute;
+    top:10px;
+    left:10px; */
+    display:flex;
+    align-items: flex-end;
+    margin-bottom:-2px;
+}
+.post-action .emoji-comment{
+    /* top:20px;
+    background:red; */
+    margin-bottom:-6px;
 }
 
 .post-action:hover {
@@ -901,7 +936,7 @@ body {
 
 
 /* Responsive */
-@media (min-width: 100px) and (max-width: 530px) {
+@media (min-width: 100px) and (max-width: 400px) {
     .header-left-right {
         display: flex;
     }
@@ -920,6 +955,9 @@ body {
 
     .post-action span {
         display: flex;
+    }
+    .post-option span{
+        display:none;
     }
 
     .main-container {
@@ -966,6 +1004,91 @@ body {
     #notifications {
         width: 95% !important;
     }
+    /* Page-specific styles */
+    #marketplace,
+    #courses,
+    #pbl,
+    #projects{
+        width: 199% !important;
+        max-width: 100% !important;
+    }
+}
+@media (min-width: 400px) and (max-width: 530px) {
+    .header-left-right {
+        display: flex;
+    }
+
+    .mobile-nav {
+        display: block;
+    }
+
+    .header-middle {
+        display: none;
+    }
+
+    .nav-icons {
+        display: none;
+    }
+
+    .post-action span {
+        display: flex;
+    }
+    .post-option{
+        padding:5px;
+    }
+
+    .main-container {
+        flex-direction: column;
+        padding: 10px;
+        position: relative;
+        margin-top: 100px;
+    }
+
+    .search-bar {
+        width: 60%;
+        transition: all .5s ease;
+    }
+
+    .search-bar:focus-within {
+        position: absolute;
+        width: 100%;
+        z-index: 99;
+    }
+
+    .header {
+        padding: 8px 16px;
+    }
+
+    .sidebar {
+        position: fixed;
+        background: var(--devnote-primary);
+        top: 110px;
+        left: -100%;
+        z-index: 100;
+        transition: left .3s ease-in-out;
+    }
+
+    .sidebar.active {
+        animation: fadeIn .8s ease-in-out;
+        left: 0;
+    }
+
+    .content {
+        width: calc(100vw - 20px) !important;
+        margin-left: 0;
+    }
+
+    #notifications {
+        width: 95% !important;
+    }
+    /* Page-specific styles */
+    #marketplace,
+    #courses,
+    #pbl,
+    #projects{
+        width: 199% !important;
+        max-width: 100% !important;
+    }
 }
 
 @media (min-width: 530px) and (max-width: 950px) {
@@ -1007,11 +1130,19 @@ body {
         display: block;
     }
 
-    .nav-icon {
+    .header-middle {
+        display: none;
+    }
+
+    .nav-icons {
+        display: none;
+    }
+
+    /* .nav-icon {
         margin-top: 20px;
         width: 60px;
         height: 60px;
-    }
+    } */
 
     .logo {
         font-size: 50px;
@@ -1044,93 +1175,33 @@ body {
     }
 
     .content {
-        width: 100%;
-        max-width: 100%;
+        /* width: 100%; */
+        /* max-width: 100%; */
         margin: 0;
+        margin-left: 20%;
     }
 
     #notification {
         display: none;
     }
 
-    .home {
+    /* .home {
         width: 100%;
-    }
+    } */
 
     #notifications {
         width: 95% !important;
     }
 }
 
-/* @media (min-width: 950px) and (max-width: 1115px) {
-    #notification{
-        display:none;
-    }
-    .sidebar
-    {
-        width:30%;
-        position:sticky;
-    }
-    .sidebar-section{
-        padding:0;
-        width:100%;
-    }
-    .sidebar-item{
-        width:100%;
-    }
-    .sidebar-icon{
-        height:60px;
-        width:60px;
-    }
-    .main-container{
-        margin-top:100px;
-    }
-    .content{
-        width:90%;
-        max-width:90%;
-        margin-left:10px;
-    }
-    .nav-icon{
-        margin-top:20px;
-        width:60px;
-        height:60px;
-    }
-    .create-post-header img{
-        width:70px;
-        height:70px;
-        border-radius:70px;
-    }
-    .create-post-header textarea{
-        height:80px;
-        max-height:80px;
-        padding:20px;
-    }
-    .avatar
-    {
-        height:60px;
-        width:60px;
-    }
-    #notification{
-        display:none;
-    }
-    .home
-    {
-        width:100%;
-    }
-    #notifications
-    {
-        width: 95% !important;
-    }
-} */
 /* Page-specific styles */
 #marketplace,
 #courses,
 #pbl,
 #projects,
-#notifications,
-#messages {
-    width: 400px;
-    max-width: 400px;
+#notifications{
+    width: 490px;
+    max-width: 480px;
 }
 
 .marketplace-item,
@@ -1165,7 +1236,7 @@ body {
 }
 
 #notifications {
-    width: 350px;
+    width: 480px;
     background: var(--devnote-accent);
     padding: 10px;
     border-radius: 10px;

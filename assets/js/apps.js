@@ -173,58 +173,23 @@ settings.addEventListener("click", () => {
     settings.style.background = settingsDropdown.classList.contains('active') ? 'var(--devnote-accent)' : 'var(--devnote-primary)';
 });
 
-//this should show posts on click even if it's the image;
-function showSinglePost() {
-    const posts = document.querySelectorAll('.show-single');
-    const singlePost = document.querySelector('#single-post');
-    const home = document.querySelector('#home');
-    posts.forEach(post => {
-        post.addEventListener("click", (event) => {
-            const moreBtn = post.querySelector('.see-more');
-            if (!moreBtn.contains(event.target)) {
-                showPost(home, singlePost);
-            }
-        });
-    });
-}
-showSinglePost();
-
-function showPost(beforeElement, element) {
-    beforeElement.classList.remove('active');
-    element.classList.add('active');
-}
-function commentBtn() {
-    const commentsBtn = document.querySelectorAll('.post-action');
-    const home = document.querySelector('#home');
-    const singlePost = document.querySelector('#single-post');
-    commentsBtn.forEach(commentBtn => {
-        commentBtn.addEventListener("click", function (event) {
-            const showComment = this.dataset.comment;
-            if (showComment) {
-                showPost(home, singlePost);
-            }
-        });
-    });
-}
-commentBtn();
-
 //get the header for future use
 const header = document.querySelector('.header');
 //this will make the messaging on pc / larger screen not show in a differnt page, but comedown in a dropdown on the right;
 const messageDiv = document.querySelector('.chat-message');
 document.querySelectorAll('.message-chat').forEach(button => {
     button.addEventListener("click", () => {
-        messageDiv.classList.toggle('active');
+        messageDiv.classList.add('active');
         button.style.background = messageDiv.classList.contains('active') ? 'var(--devnote-blue)' : '';
         const deviceWidth = document.documentElement.clientWidth;
         if (deviceWidth < 530) {
-            header.style.display = messageDiv.classList.contains('active') ? 'none' : 'block';
+            header.classList.add(messageDiv.classList.contains('active') ? 'mobile-message' : '')
         }
         // Update nav icons
         const navIcons = document.querySelectorAll('.nav-icon');
         navIcons.forEach(icon => icon.classList.remove('active'));
         askusername();
-        localStorage.getItem("targetuser");
+        // localStorage.getItem("targetuser");
     });
 });
 
@@ -238,7 +203,8 @@ document.addEventListener("click", (e) => {
             if (icons.contains(e.target) && e.target !== messageBtn) {
                 messageDiv.classList.remove(messageDiv.classList.contains('active') ? 'active' : 'active');
                 messageBtn.style.background = messageDiv.classList.contains('active') ? 'var(--devnote-blue)' : '';
-                header.style.display = messageDiv.classList.contains('active') ? 'block' : 'block';
+                header.classList.remove(messageDiv.classList.contains('active') ? 'mobile-message' : 'mobile-message')
+                icons.style.background = messageDiv.classList.contains('active') ? 'var(--devnote-blue)' : '';
             }
         })
     }

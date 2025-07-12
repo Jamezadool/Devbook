@@ -507,13 +507,22 @@
 
 @media (min-width: 100px) and (max-width: 530px) {
     .chat-message {
-        top: 116px;
+        top: 70px;
         left: 0;
         width: 100%;
         z-index:200000;
+        transition: all .2s linear;
+        max-height:92vh;
     }
 
     .chats{
-        height:80vh;
+        height:90vh;
+        /* background:red; */
+    }
+    .input-container{
+        transform:translateY(-10px);
+    }
+    .input-container:focus-within{
+        transform:translateY(-13px);
     }
 }

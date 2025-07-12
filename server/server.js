@@ -191,9 +191,9 @@ app.get('/authorize', authenticateToken, (req, res) => {
     res.json({ success: true, message: "Verified successfully" });
 });
 
-app.post('/post', async(req, res) => {
+app.post('/post', authenticateToken, async (req, res) => {
     const { content, imageUrl } = req.body;
-    const userId = req.user.id; // token payload
+    const userId = req.user.id; 
 
     try {
         await pool.execute(
@@ -204,7 +204,8 @@ app.post('/post', async(req, res) => {
     } catch (err) {
         res.status(500).json({ success: false, error: err.message });
     }
-})
+});
+
 
 
 app.get('/posts', async (req, res) => {
@@ -222,7 +223,37 @@ app.get('/posts', async (req, res) => {
 });
 
 
+//thid fetchs the post and comment for single page post and comment
+app.get('/post/:id', async(req, res) => {
+    const { id } = req.params;
 
+    try{
+        const [[post]] = await pool.execute("SELECT posts.id, posts.content, posts.image_url, posts.created_at, users.username FROM posts JOIN users ON posts.user_id = users.id WHERE posts.id = ?", [id]);
+
+        if(!post) return res.status(404).json({success: false, error: "Post not found"});
+
+        const [commentsData] = await pool.execute("SELECT comments.id, comments.content, comments.created_at, users.username FROM comments JOIn users ON comments.user_id = users.id WHERE comments.post_id = ?", [id]);
+
+        res.status(200).json({success: true, post, commentsData});
+    }catch(err){
+        res.status(500).json({success: false, error: err.message});
+    }
+});
+
+//this is to add comment to the database
+app.post("/comment", authenticateToken, async (req, res) => {
+    const { content , postId } = req.body;
+    const userId = req.user.id;
+
+    try{
+        if(!content || !postId) return res.status(500).send({success:false, error: "Try again later, If issue not fixed, please login again."});
+
+        await pool.execute("INSERT INTO comments(post_id, user_id, content) VALUES(?, ?, ?)", [postId, userId, content]);
+        res.status(200).send({success: true, message: "Comment Posted"});
+    }catch(err){
+        res.status(500).send({success: false, error: err.message});
+    }
+});
 
 app.listen(port, () => {
     console.log(`Connection started at http://localhost:${port}`);

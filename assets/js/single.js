@@ -50,52 +50,52 @@ function focusComment() {
     document.getElementById('commentInput').focus();
 }
 
-function postComment() {
-    const input = document.getElementById('commentInput');
-    const text = input.value.trim();
+// function postComment() {
+//     const input = document.getElementById('commentInput');
+//     const text = input.value.trim();
     
-    if (text) {
-        addComment('Me', text, 'now');
-        input.value = '';
-        updateCommentSubmitButton();
-        commentsCount++;
-        document.getElementById('commentsCount').textContent = commentsCount;
-    }
-}
+//     if (text) {
+//         addComment('Me', text, 'now');
+//         input.value = '';
+//         updateCommentSubmitButton();
+//         commentsCount++;
+//         document.getElementById('commentsCount').textContent = commentsCount;
+//     }
+// }
 
-function addComment(username, text, time) {
-    const commentsList = document.getElementById('commentsList');
-    const comment = document.createElement('div');
-    comment.className = 'comment';
+// function addComment(username, text, time) {
+//     const commentsList = document.getElementById('commentsList');
+//     const comment = document.createElement('div');
+//     comment.className = 'comment';
     
-    const initials = username.split(' ').map(n => n[0]).join('').toUpperCase();
-    const colors = ['#e74c3c, #f39c12', '#2ecc71, #3498db', '#9b59b6, #e67e22', '#34495e, #2c3e50'];
-    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+//     const initials = username.split(' ').map(n => n[0]).join('').toUpperCase();
+//     const colors = ['#e74c3c, #f39c12', '#2ecc71, #3498db', '#9b59b6, #e67e22', '#34495e, #2c3e50'];
+//     const randomColor = colors[Math.floor(Math.random() * colors.length)];
     
-    comment.innerHTML = `
-        <div class="comment-avatar" style="background: linear-gradient(45deg, ${randomColor});">${initials}</div>
-        <div class="comment-content">
-            <div class="comment-header">
-                <div class="comment-username">${username}</div>
-                <div class="comment-time">${time}</div>
-            </div>
-            <div class="comment-text">${text}</div>
-            <div class="comment-actions">
-                <span class="comment-action">Like</span>
-                <span class="comment-action">Reply</span>
-            </div>
-        </div>
-    `;
+//     comment.innerHTML = `
+//         <div class="comment-avatar" style="background: linear-gradient(45deg, ${randomColor});">${initials}</div>
+//         <div class="comment-content">
+//             <div class="comment-header">
+//                 <div class="comment-username">${username}</div>
+//                 <div class="comment-time">${time}</div>
+//             </div>
+//             <div class="comment-text">${text}</div>
+//             <div class="comment-actions">
+//                 <span class="comment-action">Like</span>
+//                 <span class="comment-action">Reply</span>
+//             </div>
+//         </div>
+//     `;
     
-    commentsList.appendChild(comment);
-}
+//     commentsList.appendChild(comment);
+// }
 
-function updateCommentSubmitButton() {
-    const input = document.getElementById('commentInput');
-    const submit = document.getElementById('commentSubmit');
+// function updateCommentSubmitButton() {
+//     const input = document.getElementById('commentInput');
+//     const submit = document.getElementById('commentSubmit');
     
-    submit.disabled = !input.value.trim();
-}
+//     submit.disabled = !input.value.trim();
+// }
 
 function openShareModal() {
     document.getElementById('shareModal').style.display = 'flex';
@@ -139,9 +139,9 @@ function shareOption(platform) {
     closeShareModal();
 }
 
-function showLikers() {
-    alert('127 people liked this post:\nJessica Smith, Mike Johnson, Sarah Wilson, and 124 others');
-}
+// function showLikers() {
+//     alert('127 people liked this post:\nJessica Smith, Mike Johnson, Sarah Wilson, and 124 others');
+// }
 
 // function openImageModal() {
 //     // You could implement a full-screen image modal here
@@ -172,4 +172,4 @@ document.getElementById('shareModal').addEventListener('click', function(e) {
 });
 
 // Initialize
-updateCommentSubmitButton();
+// updateCommentSubmitButton();
