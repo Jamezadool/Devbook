@@ -80,7 +80,7 @@ document.getElementById('login-form').addEventListener('submit', async function 
     loginBtn.disabled = true;
     loginBtn.textContent = "Logging in";
     try {
-        const res = await fetch('http://localhost:3000/login', {
+        const res = await fetch('https://devbook-6whv.onrender.com/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(loginPayload)
@@ -120,7 +120,7 @@ document.getElementById('signup-form').addEventListener('submit', async function
         password: document.querySelector('#signup-password').value
     }
     try {
-        const res = await fetch('http://localhost:3000/signup', {
+        const res = await fetch('https://devbook-6whv.onrender.com/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(signupPayload)
@@ -179,7 +179,7 @@ window.addEventListener("DOMContentLoaded", loadTheme);
 //     const usernameChecked = document.querySelector('#username-checked');
 //     const username = document.querySelector('#signup-username');
 //     setTimeout(() => {
-//         fetch('http://localhost:3000/checkusername', {
+//         fetch('https://devbook-6whv.onrender.com/checkusername', {
 //             method: 'POST',
 //             headers: {'Content-Type' : 'application/json'},
 //             body: JSON.stringify(username)

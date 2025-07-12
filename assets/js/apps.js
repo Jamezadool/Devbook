@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     try {
-        const res = await fetch('http://localhost:3000/authorize', {
+        const res = await fetch('https://devbook-6whv.onrender.com/authorize', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

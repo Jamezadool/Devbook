@@ -1,17 +1,25 @@
 {
-  "dependencies": {
-    "nodemailer": "^7.0.4"
-  },
-  "name": "server",
+  "name": "cs-project",
   "version": "1.0.0",
-  "main": "server.js",
-  "devDependencies": {},
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "keywords": [],
-  "description": ""
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jamezadool/Devbook.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Jamezadool/Devbook/issues"
+  },
+  "homepage": "https://github.com/Jamezadool/Devbook#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {},
+  "keywords": []
 }

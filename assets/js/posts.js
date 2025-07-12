@@ -70,7 +70,7 @@ function formatFileSize(bytes) {
 document.addEventListener('DOMContentLoaded', loadPosts);
 async function loadPosts() {
     try {
-        const res = await fetch('http://localhost:3000/posts');
+        const res = await fetch('https://devbook-6whv.onrender.com/posts');
         const data = await res.json();
 
         if (data.success) {
@@ -160,7 +160,7 @@ Postform.addEventListener("submit", async (e) => {
     };
 
     try {
-        const response = await fetch('http://localhost:3000/post', {
+        const response = await fetch('https://devbook-6whv.onrender.com/post', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -199,7 +199,7 @@ function openPost(id) {
 async function singlePostRenderer(postId) {
     const singlePost = document.querySelector('#single-post');
    
-    const response = await fetch(`http://localhost:3000/post/${postId}`);
+    const response = await fetch(`https://devbook-6whv.onrender.com/post/${postId}`);
     const data = await response.json();
 
     if (!data.success) return;
@@ -348,7 +348,7 @@ function submitPostComment(postId) {
         input.value = '';
 
         try {
-            const response = await fetch('http://localhost:3000/comment', {
+            const response = await fetch('https://devbook-6whv.onrender.com/comment', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
