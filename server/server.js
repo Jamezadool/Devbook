@@ -117,20 +117,30 @@ app.post('/post', authenticateToken, async (req, res) => {
 });
 
 app.get('/posts', async (req, res) => {
-    const limit = parseInt(req.query.limit) || 5;
-    const offset = parseInt(req.query.offset) || 0;
+    let limit = parseInt(req.query.limit, 10);
+    let offset = parseInt(req.query.offset, 10);
+
+    // Fallback values
+    if (isNaN(limit) || limit <= 0) limit = 5;
+    if (isNaN(offset) || offset < 0) offset = 0;
+
+    console.log("Limit:", limit, "Offset:", offset);
 
     try {
-        const [rows] = await pool.execute(`
+        // Use string interpolation for LIMIT/OFFSET (they're safe since you parsed them as ints)
+        const query = `
             SELECT posts.id, posts.content, posts.image_url, posts.created_at, users.username
             FROM posts
             JOIN users ON posts.user_id = users.id
             ORDER BY posts.created_at DESC
-            LIMIT ? OFFSET ?
-        `, [limit, offset]);
+            LIMIT ${limit} OFFSET ${offset}
+        `;
+
+        const [rows] = await pool.query(query);
 
         res.json({ success: true, posts: rows });
     } catch (err) {
+        console.error("Error in GET /posts:", err.message);
         res.status(500).json({ success: false, error: err.message });
     }
 });
