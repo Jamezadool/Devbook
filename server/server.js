@@ -348,31 +348,36 @@ app.post('/post', authenticateToken, async (req, res) => {
         res.status(500).json({ success: false, error: err.message });
     }
 });
-//  This shows post on the homepage
+//  This shows post on the homepage i use shared hosting mysql on cpanel it doesnt support modern way of writing 
 app.get('/posts', async (req, res) => {
-    const limit = parseInt(req.query.limit) || 5;
-    const offset = parseInt(req.query.offset) || 0;
+    let limit = parseInt(req.query.limit, 10);
+    let offset = parseInt(req.query.offset, 10);
+
+    if (!Number.isInteger(limit) || limit < 1) limit = 5;
+    if (!Number.isInteger(offset) || offset < 0) offset = 0;
+
     console.log("Sending to MySQL:", { offset, limit, types: [typeof offset, typeof limit] });
 
     try {
-
-        if (offset < 0 || limit < 1) return res.status(400).send({ success: false, error: "invalid offset or limit" });
-        const [rows] = await pool.execute(`
+        const query = `
             SELECT posts.id, posts.content, posts.image_url, posts.created_at, users.username, COUNT(comments.id) AS comment_count
             FROM posts
             JOIN users ON posts.user_id = users.id
             LEFT JOIN comments ON comments.post_id = posts.id
             GROUP BY posts.id
             ORDER BY posts.created_at DESC
-            LIMIT ? OFFSET ?
-        `, [limit, offset]);
+            LIMIT ${limit} OFFSET ${offset}
+        `;
+
+        const [rows] = await pool.query(query);
 
         res.json({ success: true, posts: rows });
     } catch (err) {
-        console.error("GET POST FAILED ", err.message);
+        console.error("GET POST FAILED", err.message);
         res.status(500).json({ success: false, error: err.message });
     }
 });
+
 
 //this fetches the post and comment for single page post and comment
 app.get('/post/:id', async (req, res) => {
