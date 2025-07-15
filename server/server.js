@@ -368,6 +368,7 @@ app.get('/posts', async (req, res) => {
 
         res.json({ success: true, posts: rows });
     } catch (err) {
+        console.error("GET /posts failed:", err);
         res.status(500).json({ success: false, error: err.message });
     }
 });
