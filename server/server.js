@@ -369,6 +369,7 @@ app.get('/posts', async (req, res) => {
         res.json({ success: true, posts: rows });
     } catch (err) {
         res.status(500).json({ success: false, error: err.message });
+        console.log(err.message);
     }
 });
 //this fetches the post and comment for single page post and comment
