@@ -352,11 +352,11 @@ app.post('/post', authenticateToken, async (req, res) => {
 app.get('/posts', async (req, res) => {
     const limit = parseInt(req.query.limit) || 5;
     const offset = parseInt(req.query.offset) || 0;
+    console.log("Sending to MySQL:", { offset, limit, types: [typeof offset, typeof limit] });
 
     try {
 
         if (offset < 0 || limit < 1) return res.status(400).send({ success: false, error: "invalid offset or limit" });
-        console.log("Sending to MySQL:", { offset, limit, types: [typeof offset, typeof limit] });
         const [rows] = await pool.execute(`
             SELECT posts.id, posts.content, posts.image_url, posts.created_at, users.username, COUNT(comments.id) AS comment_count
             FROM posts
