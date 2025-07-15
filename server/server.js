@@ -353,8 +353,8 @@ app.get('/posts', async (req, res) => {
     const offset = parseInt(req.query.offset) || 0;
 
     try {
-
-        if (offset < 0 || limit < 1) return res.status(400).send({ success: false, error: "invalid offset or limit" });
+        if (offset < 0 || limit < 1)
+            return res.status(400).send({ success: false, error: "invalid offset or limit" });
 
         const [rows] = await pool.execute(`
             SELECT posts.id, posts.content, posts.image_url, posts.created_at, users.username, COUNT(comments.id) AS comment_count
@@ -363,15 +363,15 @@ app.get('/posts', async (req, res) => {
             LEFT JOIN comments ON comments.post_id = posts.id
             GROUP BY posts.id
             ORDER BY posts.created_at DESC
-            LIMIT ? OFFSET ?
-        `, [limit, offset]);
+            LIMIT ?, ?
+        `, [offset, limit]); // ⬅ swapped
 
         res.json({ success: true, posts: rows });
     } catch (err) {
         res.status(500).json({ success: false, error: err.message });
-        console.log(err.message);
     }
 });
+
 //this fetches the post and comment for single page post and comment
 app.get('/post/:id', async (req, res) => {
     const { id } = req.params;
